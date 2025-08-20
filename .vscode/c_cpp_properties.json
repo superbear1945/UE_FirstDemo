@@ -1,0 +1,28 @@
+{
+	"configurations": [
+		{
+			"name": "TestEditor Editor Win64 Development (Test)",
+			"compilerPath": "D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"cStandard": "c17",
+			"cppStandard": "c++20",
+			"intelliSenseMode": "msvc-x64",
+			"compileCommands": "D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test.json"
+		},
+		{
+			"name": "UnrealEditor Editor Win64 Development (UE5)",
+			"compilerPath": "D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"cStandard": "c17",
+			"cppStandard": "c++20",
+			"intelliSenseMode": "msvc-x64",
+			"compileCommands": "D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_UE5.json"
+		},
+		{
+			"name": "Win32",
+			"compilerPath": "D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"cStandard": "c17",
+			"cppStandard": "c++20",
+			"intelliSenseMode": "msvc-x64",
+			"compileCommands": "D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Default.json"
+		}
+	]
+}

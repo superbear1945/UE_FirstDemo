@@ -1,0 +1,113 @@
+// vscode-clangd-ue.code-workspace
+// Author: @MrWen33
+//Superber: -1. Rename this file to {MyProjectName}.code-workspace
+//
+// 0.   Install Clang and add to your PATH
+//
+// 1.   Replace "D:/epic/UE_5.6" to your unreal engine absolute path.
+//      Replace "Test" to your project name
+//      Replace "${workspaceFolder}\\Test.uproject" to your .uproject file absolute path
+//
+// 2.   Open this file with vscode and run task "GenCompileCommands"
+//
+// 3.   enjoy coding!
+//
+
+{
+    "folders": [
+        {
+            "name": "Test",
+            "path": "."
+        },
+        {
+            "name": "UE5",
+            "path": "D:/epic/UE_5.6"
+        }
+    ],
+    "settings": {
+        "typescript.tsc.autoDetect": "off",
+        "C_Test.intelliSenseEngine": "disabled",
+        "C_Test.autocomplete": "disabled",
+        "C_Test.errorSquiggles": "disabled",
+
+        "clangd.arguments": [
+            "--compile-commands-dir=.vscode",
+            "-pretty",
+            "--clang-tidy",
+            "-j=12",
+            "--header-insertion=iwyu",
+            "--all-scopes-completion",
+            "--completion-style=detailed",
+            "--pch-storage=memory",
+            "--clang-tidy-checks=-misc-unused-using-decls,-misc-include-cleaner"
+        ]
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.Testtools",
+            "ms-dotnettools.csharp",
+            "llvm-vs-code-extensions.vscode-clangd"
+        ]
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Gen Generated Code",
+                "group": "none",
+                "command": "D:\\epic\\UE_5.6\\Engine\\Binaries\\DotNET\\UnrealBuildTool\\UnrealBuildTool.exe",
+                "args": [
+                    "TestEditor",
+                    "Win64",
+                    "DebugGame",
+                    "-SkipBuild",
+                    "-project=${workspaceFolder}\\Test.uproject",
+                    "-game",
+                    "-engine"
+                ],
+                "type": "shell",
+                "options": {
+                    "cwd": "D:/epic/UE_5.6"
+                }
+            },
+            {
+                "label": "Subtask:GenClangDatabase",
+                "group": "none",
+                "command": "D:\\epic\\UE_5.6\\Engine\\Binaries\\DotNET\\UnrealBuildTool\\UnrealBuildTool.exe",
+                "args": [
+                    "TestEditor",
+                    "Win64",
+                    "DebugGame",
+                    "-SkipBuild",
+                    "-project=${workspaceFolder}\\Test.uproject",
+                    "-game",
+                    "-engine",
+                    "-mode=GenerateClangDatabase"
+                ],
+                "type": "shell",
+                "options": {
+                    "cwd": "D:/epic/UE_5.6"
+                }
+            },
+            {
+                "label": "Subtask:MoveCompileCommands",
+                "group": "none",
+                "command": "move",
+                "args": [
+                    "compile_commands.json",
+                    "${workspaceFolder}/.vscode/compile_commands.json"
+                ],
+                "type": "shell",
+                "options": {
+                    "cwd": "D:/epic/UE_5.6"
+                }
+            },
+            {
+                "label": "Gen Compile Commands",
+                "group": "none",
+                "dependsOn": ["Subtask:GenClangDatabase", "Subtask:MoveCompileCommands"],
+                "dependsOrder": "sequence"
+            }
+        ]
+    }
+}

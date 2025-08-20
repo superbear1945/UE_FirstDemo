@@ -1,0 +1,122 @@
+[
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\AK47.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\BulletBase.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\EnemyBase.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\GunBase.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\MyCharacter.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\MyEnemyBase.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\AK47.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\BulletBase.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\EnemyBase.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\GunBase.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\MyCharacter.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\MyEnemyBase.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Test.Build.cs",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Test.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Test.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	}
+]

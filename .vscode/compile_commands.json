@@ -1,0 +1,38 @@
+[
+	{
+		"file": "D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/Module.Test.gen.cpp",
+		"command": "\"C:/Program Files/LLVM/bin/clang-cl.exe\" @\"D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/Module.Test.gen.cpp.obj.rsp\" ",
+		"directory": "D:/epic/UE_5.6/Engine/Source",
+		"output": "D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/Module.Test.gen.cpp.obj"
+	},
+	{
+		"file": "D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/PerModuleInline.gen.cpp",
+		"command": "\"C:/Program Files/LLVM/bin/clang-cl.exe\" @\"D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/PerModuleInline.gen.cpp.obj.rsp\" ",
+		"directory": "D:/epic/UE_5.6/Engine/Source",
+		"output": "D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/PerModuleInline.gen.cpp.obj"
+	},
+	{
+		"file": "D:/epic/UE_5.6/Project/Test/Source/Test/Private/EnemyBase.cpp",
+		"command": "\"C:/Program Files/LLVM/bin/clang-cl.exe\" @\"D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/EnemyBase.cpp.obj.rsp\" ",
+		"directory": "D:/epic/UE_5.6/Engine/Source",
+		"output": "D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/EnemyBase.cpp.obj"
+	},
+	{
+		"file": "D:/epic/UE_5.6/Project/Test/Source/Test/Private/MyCharacter.cpp",
+		"command": "\"C:/Program Files/LLVM/bin/clang-cl.exe\" @\"D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/MyCharacter.cpp.obj.rsp\" ",
+		"directory": "D:/epic/UE_5.6/Engine/Source",
+		"output": "D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/MyCharacter.cpp.obj"
+	},
+	{
+		"file": "D:/epic/UE_5.6/Project/Test/Source/Test/Private/MyEnemyBase.cpp",
+		"command": "\"C:/Program Files/LLVM/bin/clang-cl.exe\" @\"D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/MyEnemyBase.cpp.obj.rsp\" ",
+		"directory": "D:/epic/UE_5.6/Engine/Source",
+		"output": "D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/MyEnemyBase.cpp.obj"
+	},
+	{
+		"file": "D:/epic/UE_5.6/Project/Test/Source/Test/Test.cpp",
+		"command": "\"C:/Program Files/LLVM/bin/clang-cl.exe\" @\"D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/Test.cpp.obj.rsp\" ",
+		"directory": "D:/epic/UE_5.6/Engine/Source",
+		"output": "D:/epic/UE_5.6/Project/Test/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Test/Test.cpp.obj"
+	}
+]
