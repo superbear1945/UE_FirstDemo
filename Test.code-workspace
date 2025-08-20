@@ -6,7 +6,7 @@
 //
 // 1.   Replace "D:/epic/UE_5.6" to your unreal engine absolute path.
 //      Replace "Test" to your project name
-//      Replace "${workspaceFolder}\\Test.uproject" to your .uproject file absolute path
+//      Replace "D:/epic/UE_5.6/Project/Test/Test.uproject" to your .uproject file absolute path
 //
 // 2.   Open this file with vscode and run task "GenCompileCommands"
 //
@@ -44,7 +44,7 @@
     },
     "extensions": {
         "recommendations": [
-            "ms-vscode.Testtools",
+            "ms-vscode.cpptools",
             "ms-dotnettools.csharp",
             "llvm-vs-code-extensions.vscode-clangd"
         ]
@@ -61,7 +61,7 @@
                     "Win64",
                     "DebugGame",
                     "-SkipBuild",
-                    "-project=${workspaceFolder}\\Test.uproject",
+                    "-project=D:/epic/UE_5.6/Project/Test/Test.uproject",
                     "-game",
                     "-engine"
                 ],
@@ -79,7 +79,7 @@
                     "Win64",
                     "DebugGame",
                     "-SkipBuild",
-                    "-project=${workspaceFolder}\\Test.uproject",
+                    "-project=D:/epic/UE_5.6/Project/Test/Test.uproject",
                     "-game",
                     "-engine",
                     "-mode=GenerateClangDatabase"

@@ -85,6 +85,7 @@
 /Engine/Source/Programs/AutomationTool/SteamDeck/bin
 /Engine/Source/Programs/AutomationTool/TVOS/obj
 /Engine/Source/Programs/AutomationTool/TVOS/bin
+/Project/Test/.git
 /Project/Test/.vs
 /Project/Test/.vscode
 /Project/Test/Content

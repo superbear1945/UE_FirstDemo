@@ -48,6 +48,38 @@
 		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
 	},
 	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\ObjectPoolComponent.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\Poolable.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\StopShooting.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Private\\WeaponBase.cpp",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
 		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\AK47.h",
 		"arguments": [
 			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
@@ -89,6 +121,46 @@
 	},
 	{
 		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\MyEnemyBase.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\ObjectPoolComponent.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\Poolable.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\StopShooting.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\WeaponBase.h",
+		"arguments": [
+			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
+		],
+		"directory": "D:\\epic\\UE_5.6\\Engine\\Source"
+	},
+	{
+		"file": "D:\\epic\\UE_5.6\\Project\\Test\\Source\\Test\\Public\\WeaponData.h",
 		"arguments": [
 			"D:\\about creating\\Visual_Studio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\epic\\UE_5.6\\Project\\Test\\.vscode\\compileCommands_Test\\Test.1.rsp"
