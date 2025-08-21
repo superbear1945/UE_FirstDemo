@@ -20,7 +20,7 @@ void UBTS_ChangeAttackable::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* N
     {
         return;
     }
-    
+        
     // 获取当前控制的Pawn
     AAIController* AIController = OwnerComp.GetAIOwner();
     if (!AIController) return;
