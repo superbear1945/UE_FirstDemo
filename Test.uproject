@@ -1,25 +1,3 @@
-{
-	"FileVersion": 3,
-	"EngineAssociation": "5.6",
-	"Category": "",
-	"Description": "",
-	"Modules": [
-		{
-			"Name": "Test",
-			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"AdditionalDependencies": [
-				"Engine"
-			]
-		}
-	],
-	"Plugins": [
-		{
-			"Name": "ModelingToolsEditorMode",
-			"Enabled": true,
-			"TargetAllowList": [
-				"Editor"
-			]
-		}
-	]
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:270f053b1cfd34eac30f67b05f44d9ce6fe7888c906f8574608cc2605fbf9046
+size 400
