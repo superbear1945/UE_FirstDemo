@@ -15,12 +15,17 @@ void UBTS_ChangeAttackable::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* N
     Super::TickNode(OwnerComp, NodeMemory, DeltaSeconds);
 
     UBlackboardComponent* BlackboardComp = OwnerComp.GetBlackboardComponent();
-    AAIController* AIController = OwnerComp.GetAIOwner();
 
-    if (!BlackboardComp || !AIController || !AIController->GetPawn())
+    if (!BlackboardComp)
     {
         return;
     }
+    
+    // 获取当前控制的Pawn
+    AAIController* AIController = OwnerComp.GetAIOwner();
+    if (!AIController) return;
+    APawn* ControlledPawn = AIController->GetPawn();
+    if (!ControlledPawn) return;
 
     // 从黑板获取目标Actor
     AActor* TargetActor = Cast<AActor>(BlackboardComp->GetValueAsObject(TargetActorKey.SelectedKeyName));
@@ -31,7 +36,7 @@ void UBTS_ChangeAttackable::TickNode(UBehaviorTreeComponent& OwnerComp, uint8* N
     }
 
     // 计算距离
-    float Distance = FVector::Dist(AIController->GetPawn()->GetActorLocation(), TargetActor->GetActorLocation());
+    float Distance = FVector::Dist(ControlledPawn->GetActorLocation(), TargetActor->GetActorLocation());
 
     // 根据距离更新黑板
     bool bIsCloseEnough = Distance <= AttackRange;
