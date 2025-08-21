@@ -18,9 +18,13 @@ struct FWeaponData : public FTableRowBase // 必须继承自FTableRowBase
     GENERATED_BODY()
 
 public:
+    // 物品ID名称
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")
+    FName ItemID;
+
     // UI中显示的图标
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")
-    TSoftObjectPtr<UPaperSprite> Icon;
+    UPaperSprite *Icon;
     
     // 重量
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")

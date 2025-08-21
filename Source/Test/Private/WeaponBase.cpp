@@ -15,23 +15,25 @@ AWeaponBase::AWeaponBase()
 void AWeaponBase::BeginPlay()
 {
 	Super::BeginPlay();
+	LoadWeaponData(); //在Event Begin时，加载Weapon DataTable中的数据
 	
 }
 
 void AWeaponBase::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
-	LoadWeaponData(); //在组件加载完成后，加载Weapon DataTable中的数据
+
 }
 
 void AWeaponBase::LoadWeaponData()
 {
-    if (WeaponDataTable && !WeaponID.IsNone())
+    UE_LOG(LogTemp, Warning, TEXT("%s: Loading weapon data..."), *GetName());
+    if (WeaponDataTable != nullptr && !WeaponID.IsNone())
     {
         static const FString ContextString(TEXT("Weapon Data"));
         FWeaponData* DataRow = WeaponDataTable->FindRow<FWeaponData>(WeaponID, ContextString, true);
 
-        if (DataRow)
+        if (DataRow)    
         {
             Icon = DataRow->Icon;
             Weight = DataRow->Weight;
@@ -46,9 +48,13 @@ void AWeaponBase::LoadWeaponData()
             CurrentAmmo = DataRow->CurrentAmmo;
         }
     }
+	else if(!WeaponDataTable)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s: WeaponDataTable is not set in AWeaponBase!"), *GetName());
+	}
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("%s: WeaponDataTable or WeaponID is not set in AWeaponBase!"), *GetName());
+		UE_LOG(LogTemp, Warning, TEXT("%s: WeaponID is not set in AWeaponBase!"), *GetName());
 	}
 }
 
