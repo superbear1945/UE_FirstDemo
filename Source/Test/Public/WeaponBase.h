@@ -98,7 +98,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
     
-    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Default")
+    UFUNCTION(BlueprintCallable, Category = "Default")
     // 装备武器时，调整位置插槽等
     virtual void OnEquipped();
 
