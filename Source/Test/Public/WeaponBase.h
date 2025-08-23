@@ -30,7 +30,6 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	virtual void PostInitializeComponents() override;
 
 	//要使用的武器数据资产
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "WeaponBase")
@@ -97,5 +96,10 @@ private:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+    
+    UFUNCTION(BlueprintCallable, BlueprintImplementableEvent, Category = "Default")
+    // 装备武器时，调整位置插槽等
+    virtual void OnEquipped();
 
 };

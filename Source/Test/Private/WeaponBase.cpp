@@ -19,10 +19,9 @@ void AWeaponBase::BeginPlay()
 	
 }
 
-void AWeaponBase::PostInitializeComponents()
+void AWeaponBase::OnEquipped()
 {
-	Super::PostInitializeComponents();
-
+    // 装备武器时需要做的操作，例如调整位置旋转等
 }
 
 void AWeaponBase::LoadWeaponData()
