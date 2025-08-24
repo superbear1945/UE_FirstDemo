@@ -37,6 +37,6 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void AMyCharacter::Attack()
 {
-	
+	UE_LOG(LogTemp, Warning, TEXT("Hello"));
 }
 
