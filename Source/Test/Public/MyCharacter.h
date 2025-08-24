@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "UObject/UnrealType.h"
+#include "WeaponBase.h"
 #include "MyCharacter.generated.h"
 
 UCLASS()
@@ -19,6 +21,10 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
+	AWeaponBase *CurrentWeapon;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -26,8 +32,15 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	// 按下攻击键后调用的函数
 	UFUNCTION(BlueprintCallable, Category = "Player")
 	void Attack();
+	
+	UFUNCTION(BlueprintCallable, Category = "Player")
+	void SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID);
+	
+	UFUNCTION(BlueprintCallable, Category = "Player")
+	void Shoot();
+
 
 };

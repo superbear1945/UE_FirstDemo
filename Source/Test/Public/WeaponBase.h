@@ -43,7 +43,7 @@ protected:
 	// 武器自身属性，需要通过DataTable加载
 	// UI中显示的图标
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")
-    TSoftObjectPtr<UPaperSprite> Icon;
+    UPaperSprite *Icon;
     
     // 重量
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")
@@ -102,4 +102,16 @@ public:
     // 装备武器时，调整位置插槽等
     virtual void OnEquipped();
 
+    // C++ Getters for Weapon Properties
+    UPaperSprite* GetIcon() const { return Icon; }
+    float GetWeight() const { return Weight; }
+    int32 GetPrice() const { return Price; }
+    TSoftClassPtr<AWeaponBase> GetWeaponBP() const { return WeaponBP; }
+    float GetDamage() const { return Damage; }
+    float GetAttackRange() const { return AttackRange; }
+    EWeaponType GetWeaponType() const { return WeaponType; }
+    const FTransform& GetSocketOffSet() const { return SocketOffSet; }
+    float GetFireSpeed() const { return FireSpeed; }
+    int32 GetMagazineCapacity() const { return MagazineCapacity; }
+    int32 GetCurrentAmmo() const { return CurrentAmmo; }
 };

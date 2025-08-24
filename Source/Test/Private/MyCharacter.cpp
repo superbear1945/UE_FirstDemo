@@ -2,6 +2,8 @@
 
 
 #include "MyCharacter.h"
+#include "Engine/DataTable.h"
+#include "WeaponBase.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -36,6 +38,16 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 }
 
 void AMyCharacter::Attack()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Hello"));
+}
+
+void AMyCharacter::Shoot()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Hello"));
+}
+
+void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Hello"));
 }
