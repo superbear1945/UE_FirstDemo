@@ -35,8 +35,3 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 }
 
-void AMyCharacter::Attack()
-{
-	
-}
-
