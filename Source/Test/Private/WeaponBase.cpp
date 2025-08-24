@@ -37,7 +37,7 @@ void AWeaponBase::LoadWeaponData()
             Icon = DataRow->Icon;
             Weight = DataRow->Weight;
             Price = DataRow->Price;
-            WeaponBP = DataRow->WeaponBP;
+            WeaponBP = DataRow->WeaponClass;
             Damage = DataRow->Damage;
             AttackRange = DataRow->AttackRange;
             WeaponType = DataRow->WeaponType;

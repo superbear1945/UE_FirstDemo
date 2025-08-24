@@ -4,6 +4,7 @@
 #include "MyCharacter.h"
 #include "Engine/DataTable.h"
 #include "WeaponBase.h"
+#include "WeaponData.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -49,6 +50,15 @@ void AMyCharacter::Shoot()
 
 void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Hello"));
+	if (WeaponDataTable == nullptr || WeaponID.IsNone()) return;
+
+	static const FString ContextString(TEXT("Player Switch Weapon"));
+	
+	//查找武器数据
+    FWeaponData* DataRow = WeaponDataTable->FindRow<FWeaponData>(WeaponID, ContextString, true);
+	if(!DataRow) return;
+
+	// 切换逻辑，更改CurrentWeapon指向等
+	CurrentWeapon = DataRow->WeaponClass;
 }
 

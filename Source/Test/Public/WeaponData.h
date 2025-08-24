@@ -37,7 +37,7 @@ public:
     // 武器类特有属性
     // 武器的蓝图类
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
-    TSoftClassPtr<AWeaponBase> WeaponBP;
+    AWeaponBase* WeaponClass;
 
     // 基础伤害值
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
