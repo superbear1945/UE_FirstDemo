@@ -16,11 +16,6 @@ AGunBase::AGunBase()
 void AGunBase::BeginPlay()
 {
 	Super::BeginPlay();
-
-	//防止开局时先播放一次换弹音效
-	if(ReloadAudioComponent)
-		ReloadAudioComponent->bAutoActivate = false;
-
 }
 
 // Called every frame
@@ -45,6 +40,14 @@ void AGunBase::Reload()
 bool AGunBase::GetIsReloading()
 {
 	return IsReloading;
+}
+
+void AGunBase::ReloadDone()
+{
+	MaxAmmo = CurrentAmmo;
+	IsReloading = false;
+	IsMagazineFull = true;
+	IsMagazineEmpty = false;
 }
 
 void AGunBase::StopShooting_Implementation()

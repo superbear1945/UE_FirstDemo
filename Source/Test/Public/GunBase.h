@@ -26,14 +26,6 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
-	USceneComponent *MuzzleFromBP;
-
-	// 在蓝图中为它赋值
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
-    UAudioComponent* ShootAudioComponent;
-
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	int MaxAmmo = 30;
@@ -46,7 +38,6 @@ protected:
 	bool IsMagazineEmpty = false;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	bool IsMagazineFull = true;
-	
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	float ReloadTime = 2.0f; // Reload time in seconds
@@ -54,6 +45,13 @@ protected:
 	// Reload Audio Component
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	UAudioComponent *ReloadAudioComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
+	USceneComponent *MuzzleFromBP;
+
+	// 在蓝图中为它赋值
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
+    UAudioComponent* ShootAudioComponent;
 
 	/** 播放换弹动画蒙太奇的函数 */
     UFUNCTION(BlueprintCallable, Category = "Animation")
@@ -73,11 +71,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void Reload();
 
+	// 上弹蒙太奇结束时的回调函数
+	UFUNCTION(BlueprintCallable, Category = "GunBase")
+	void ReloadDone();
+
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	bool GetIsReloading();
 
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void Shoot();
+
+
 
 	virtual void Attack() override;
 
