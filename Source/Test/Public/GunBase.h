@@ -37,6 +37,10 @@ protected:
     UFUNCTION(BlueprintCallable, Category = "GunBase|Animation")
     float PlayReloadMontage();
 
+	// 获取子弹发射的位置
+	UFUNCTION(BlueprintPure,BlueprintCallable, Category = "GunBase")
+	FVector GetBulletShootLocation();
+
 	// 从对象池中生成子弹，在Shoot方法中被调用
 	void SpawnBulletFromPool();
 

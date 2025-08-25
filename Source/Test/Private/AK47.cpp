@@ -20,16 +20,7 @@ void AAK47::BeginPlay()
 	Super::BeginPlay();
 }
 
-FVector AAK47::GetBulletShootLocation()
-{
-	if(MuzzleFromBP == nullptr){return FVector::ZeroVector;}
-	if(!GetWorld()->GetFirstPlayerController()) { return FVector::ZeroVector; } //检测是否存在玩家
-	FVector PlayerLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-	FVector MuzzleLocation = MuzzleFromBP->GetComponentLocation();
-	FVector PlayerForward = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorForwardVector();
-	FVector GunDirection = MuzzleLocation - PlayerLocation; //玩家指向枪口的方向
-	return (GunDirection.ProjectOnTo(PlayerForward) + PlayerLocation);
-}
+
 
 // Called every frame
 void AAK47::Tick(float DeltaTime)

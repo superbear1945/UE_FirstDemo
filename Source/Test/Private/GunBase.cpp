@@ -30,6 +30,17 @@ void AGunBase::Tick(float DeltaTime)
 	
 }
 
+FVector AGunBase::GetBulletShootLocation()
+{
+	if(MuzzleFromBP == nullptr){return FVector::ZeroVector;}
+	if(!GetWorld()->GetFirstPlayerController()) { return FVector::ZeroVector; } //检测是否存在玩家
+	FVector PlayerLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	FVector MuzzleLocation = MuzzleFromBP->GetComponentLocation();
+	FVector PlayerForward = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorForwardVector();
+	FVector GunDirection = MuzzleLocation - PlayerLocation; //玩家指向枪口的方向
+	return (GunDirection.ProjectOnTo(PlayerForward) + PlayerLocation);
+}
+
 void AGunBase::Reload()
 {
 	IsReloading = true;
@@ -152,7 +163,7 @@ void AGunBase::SpawnBulletFromPool()
 	Bullet->SetObjectPoolComponent(BulletPool);
 
 	// 设置子弹旋转和位置
-	BulletActor->SetActorLocation(MuzzleFromBP->GetComponentLocation());
+	BulletActor->SetActorLocation(GetBulletShootLocation());
 	
 	APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
 	// 实现不瞄准时有扩散，瞄准才是百分比准的效果

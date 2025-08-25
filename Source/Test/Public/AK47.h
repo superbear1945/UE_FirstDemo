@@ -24,8 +24,7 @@ protected:
 	virtual void BeginPlay() override;
 	
 
-	UFUNCTION(BlueprintPure,BlueprintCallable, Category = "GunBase")
-	FVector GetBulletShootLocation();
+	
 
 	
 
