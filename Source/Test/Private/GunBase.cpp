@@ -40,6 +40,7 @@ void AGunBase::Reload()
 	}
 	
 	ReloadTime = PlayReloadMontage();
+	StopShooting(); // 换弹时停止射击
 }
 
 bool AGunBase::GetIsReloading()
@@ -97,6 +98,8 @@ float AGunBase::PlayReloadMontage()
 
 void AGunBase::Attack()
 {
+	if(IsReloading || IsMagazineEmpty) return; // 换弹或没子弹时不能开枪
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Blue, TEXT("Shoot"));
 	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
 
 	// 获取当前定时器剩余时间，如果大于0说明现在处于两枪中间的间隙，此时不能开枪
