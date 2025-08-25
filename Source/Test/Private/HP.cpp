@@ -10,7 +10,7 @@ UHP::UHP()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 
-	CurrentHP = MaxHP; // 初始化当前生命值
+	
 	// ...
 }
 
@@ -19,6 +19,7 @@ UHP::UHP()
 void UHP::BeginPlay()
 {
 	Super::BeginPlay();
+	CurrentHP = MaxHP; // 初始化当前生命值
 
 	// ...
 	

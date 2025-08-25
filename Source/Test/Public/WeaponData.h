@@ -6,10 +6,16 @@
 #include "Engine/DataTable.h"
 #include "PaperSprite.h"
 #include "ShowFlags.h"
-#include "WeaponBase.h"
 #include "WeaponData.generated.h"
 
-
+UENUM(BlueprintType)
+enum class EWeaponType : uint8
+{
+	None		UMETA(DisplayName = "None"),
+	Melee		UMETA(DisplayName = "Melee"),
+	AutoRanged	UMETA(DisplayName = "Ranged"),
+	SemiRanged	UMETA(DisplayName = "SemiRanged"),
+};
 
 // 使用USTRUCT宏，使其能被UE的反射系统识别，并设为BlueprintType以便蓝图使用
 USTRUCT(BlueprintType)
@@ -37,7 +43,7 @@ public:
     // 武器类特有属性
     // 武器的蓝图类
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
-    AWeaponBase* WeaponClass;
+    TSoftClassPtr<class AWeaponBase> WeaponClass;
 
     // 基础伤害值
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")

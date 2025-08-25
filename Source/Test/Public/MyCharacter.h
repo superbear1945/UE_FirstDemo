@@ -23,7 +23,7 @@ protected:
 
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
-	AWeaponBase *CurrentWeapon;
+	TSoftClassPtr<AWeaponBase> CurrentWeapon;
 
 
 public:	
@@ -39,9 +39,5 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Player")
 	void SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID);
-	
-	UFUNCTION(BlueprintCallable, Category = "Player")
-	void Shoot();
-
 
 };

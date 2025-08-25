@@ -52,6 +52,10 @@ protected:
     UFUNCTION(BlueprintCallable, Category = "Animation")
     float PlayReloadMontage();
 
+	//换弹动画的蒙太奇资产，需要在蓝图中初始化
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation", meta = (AllowPrivateAccess = "true"))
+    UAnimMontage* ReloadMontage;
+
 
 
 public:	
@@ -65,11 +69,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	bool GetIsReloading();
 
+	UFUNCTION(BlueprintCallable, Category = "GunBase")
+	void Shoot();
+
 	virtual void StopShooting_Implementation() override;
 
 private:
-	//换弹动画的蒙太奇，需要在蓝图中初始化
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation", meta = (AllowPrivateAccess = "true"))
-    UAnimMontage* ReloadMontage;
+	
 
 };

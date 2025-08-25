@@ -43,10 +43,7 @@ void AMyCharacter::Attack()
 	UE_LOG(LogTemp, Warning, TEXT("Hello"));
 }
 
-void AMyCharacter::Shoot()
-{
-	UE_LOG(LogTemp, Warning, TEXT("Hello"));
-}
+
 
 void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
 {

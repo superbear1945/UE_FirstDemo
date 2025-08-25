@@ -6,16 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "UObject/ObjectMacros.h"
 #include "PaperSprite.h"
+#include "WeaponData.h"
 #include "WeaponBase.generated.h"
-
-UENUM(BlueprintType)
-enum class EWeaponType : uint8
-{
-	None		UMETA(DisplayName = "None"),
-	Melee		UMETA(DisplayName = "Melee"),
-	AutoRanged	UMETA(DisplayName = "Ranged"),
-	SemiRanged	UMETA(DisplayName = "SemiRanged"),
-};
 
 UCLASS()
 class TEST_API AWeaponBase : public AActor

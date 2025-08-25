@@ -92,4 +92,9 @@ float AGunBase::PlayReloadMontage()
     return PlayerAnimInstance->Montage_Play(ReloadMontage, 1.0f); // 第二个参数是播放速率
 }
 
+void AGunBase::Shoot()
+{
+	
+}
+
 
