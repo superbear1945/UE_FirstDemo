@@ -61,7 +61,7 @@ bool AGunBase::GetIsReloading()
 
 void AGunBase::ReloadDone()
 {
-	CurrentAmmo = MaxAmmo;
+	CurrentAmmo = MaxMagazineAmmo;
 	IsReloading = false;
 	IsMagazineFull = true;
 	IsMagazineEmpty = false;

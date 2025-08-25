@@ -69,7 +69,7 @@ protected:
     float FireSpeed;
     // 弹夹容量
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
-    int MagazineCapacity;
+    int MaxMagazineAmmo;
     // 当前弹药数量
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
     int CurrentAmmo;
@@ -105,6 +105,6 @@ public:
     EWeaponType GetWeaponType() const { return WeaponType; }
     const FTransform& GetSocketOffSet() const { return SocketOffSet; }
     float GetFireSpeed() const { return FireSpeed; }
-    int32 GetMagazineCapacity() const { return MagazineCapacity; }
+    int32 GetMaxMagazineAmmo() const { return MaxMagazineAmmo; }
     int32 GetCurrentAmmo() const { return CurrentAmmo; }
 };

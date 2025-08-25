@@ -74,7 +74,7 @@ public:
 
     // 弹夹容量
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
-    int MagazineCapacity;
+    int MaxMagazineAmmo;
 
     // 当前弹药数量
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")

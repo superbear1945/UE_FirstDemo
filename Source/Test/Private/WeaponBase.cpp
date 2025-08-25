@@ -42,7 +42,7 @@ void AWeaponBase::LoadWeaponData()
             WeaponType = DataRow->WeaponType;
             SocketOffSet = DataRow->SocketOffSet;
             FireSpeed = DataRow->FireSpeed;
-            MagazineCapacity = DataRow->MagazineCapacity;
+            MaxMagazineAmmo = DataRow->MaxMagazineAmmo;
             CurrentAmmo = DataRow->CurrentAmmo;
             HipFireSpreadYawAngle = DataRow->HipFireSpreadYawAngle;
             BulletSpeed = DataRow->BulletSpeed;
