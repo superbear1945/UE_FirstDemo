@@ -60,7 +60,7 @@ protected:
 	// Reload Audio Component
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	UAudioComponent *ReloadAudioComponent;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase", meta = (AllowPrivateAccess = "true"))
 	USceneComponent *MuzzleFromBP;
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
     UAudioComponent* ShootAudioComponent;
@@ -75,7 +75,9 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|ObjectPool")
 	UObjectPoolComponent *BulletPool;
 
-	
+	// 定义一个定时器句柄，用于全自动武器射击的逻辑
+	FTimerHandle ShootTimerHandle; 
+	void StopShootTimerHandle(); // 关闭射击定时器的函数
 
 public:	
 	// Called every frame
@@ -92,11 +94,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	bool GetIsReloading();
 
-	UFUNCTION(BlueprintCallable, Category = "GunBase")
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "GunBase")
 	void Shoot();
+	virtual void Shoot_Implementation();
 
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void StopShooting();
+
+	UFUNCTION(BlueprintPure, BlueprintCallable, Category = "GunBase")
+	USceneComponent* GetMuzzleFromBP() const{return MuzzleFromBP;}
 
 	// 获取两枪之间的射击间隔时间
 	float GetShootDuration();

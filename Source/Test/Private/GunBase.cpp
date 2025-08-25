@@ -1,7 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "GunBase.h"
+#include "NiagaraComponent.h"      
+#include "NiagaraFunctionLibrary.h" 
 #include "Engine/TimerHandle.h"
 #include "Engine/World.h"
 #include "BulletBase.h"
@@ -97,7 +98,6 @@ float AGunBase::PlayReloadMontage()
 void AGunBase::Attack()
 {
 	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
-	FTimerHandle ShootTimerHandle; // 定义一个定时器句柄，用于后续全自动武器射击的逻辑
 
 	// 获取当前定时器剩余时间，如果大于0说明现在处于两枪中间的间隙，此时不能开枪
 	float AutoShootRemainingTime = TimeManager.GetTimerRemaining(ShootTimerHandle);
@@ -113,7 +113,7 @@ void AGunBase::Attack()
 						true);
 }
 
-void AGunBase::Shoot()
+void AGunBase::Shoot_Implementation()
 {
 	IsMagazineEmpty = (CurrentAmmo <= 0);
 	if(!IsMagazineEmpty && !IsReloading)
@@ -124,11 +124,13 @@ void AGunBase::Shoot()
 		SpawnBulletFromPool();
 
 		// 生成枪口火焰在蓝图中实现
+		
 	}
 	else 
 	{
 		//防止在换弹中途还能换弹
 		if(IsReloading) return;
+		StopShooting();
 		Reload();
 	}
 }
@@ -176,7 +178,26 @@ void AGunBase::SpawnBulletFromPool()
 
 void AGunBase::StopShooting()
 {
-	ShootAudioComponent->Stop();
+	ShootAudioComponent->Stop(); // 停止枪声
+	
+	// 在定时器计时结束后清空计时器
+	if(!ShootTimerHandle.IsValid()) return;
+
+	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
+	TimeManager.SetTimer
+	(
+		ShootTimerHandle, 
+		this, 
+		&AGunBase::StopShootTimerHandle, 
+		TimeManager.GetTimerRemaining(ShootTimerHandle), 
+		false
+	);
+}
+
+void AGunBase::StopShootTimerHandle()
+{
+	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
+	TimeManager.ClearTimer(ShootTimerHandle);
 }
 
 float AGunBase::GetShootDuration()
