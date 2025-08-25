@@ -99,7 +99,17 @@ void AGunBase::Attack()
 
 void AGunBase::Shoot()
 {
-	
+	IsMagazineEmpty = (CurrentAmmo <= 0);
+	if(!IsMagazineEmpty && !IsReloading)
+	{
+
+	}
+	else 
+	{
+		//防止在换弹中途还能换弹
+		if(IsReloading) return;
+		Reload();
+	}
 }
 
 

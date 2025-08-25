@@ -22,10 +22,9 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AK47")
-	USceneComponent *MuzzleFromBP;
+	
 
-	UFUNCTION(BlueprintPure,BlueprintCallable, Category = "AK47")
+	UFUNCTION(BlueprintPure,BlueprintCallable, Category = "GunBase")
 	FVector GetBulletShootLocation();
 
 	

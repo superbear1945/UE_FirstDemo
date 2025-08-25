@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Components/AudioComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "UObject/UnrealType.h"
@@ -40,4 +41,6 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player")
 	void SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID);
 
+private:
+    
 };
