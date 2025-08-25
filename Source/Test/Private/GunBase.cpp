@@ -101,7 +101,19 @@ void AGunBase::Attack()
 {
 	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
 	FTimerHandle ShootTimerHandle; // 定义一个定时器句柄，用于后续全自动武器射击的逻辑
-	TimeManager.GetTimerRemaining(ShootTimerHandle);
+
+	// 获取当前定时器剩余时间，如果大于0说明现在处于两枪中间的间隙，此时不能开枪
+	float AutoShootRemainingTime = TimeManager.GetTimerRemaining(ShootTimerHandle);
+	if(AutoShootRemainingTime > 0) return;
+
+	Shoot(); // 调用Attack且不处于两枪中间的间隙时立刻开火，随后开始全自动射击的逻辑
+
+	// 通过一个开启循环的定时器来实现全自动射击
+	TimeManager.SetTimer(ShootTimerHandle,
+						this,
+						&AGunBase::Shoot,
+						GetShootDuration(),
+						true);
 }
 
 void AGunBase::Shoot()
@@ -117,6 +129,11 @@ void AGunBase::Shoot()
 		if(IsReloading) return;
 		Reload();
 	}
+}
+
+float AGunBase::GetShootDuration()
+{
+	return 60 / FireSpeed;
 }
 
 

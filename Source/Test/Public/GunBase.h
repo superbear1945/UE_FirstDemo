@@ -9,6 +9,7 @@
 #include "WeaponBase.h"
 #include "UObject/ObjectMacros.h"
 #include "StopShooting.h"
+#include "ObjectPoolComponent.h"
 #include "GunBase.generated.h"
 
 class UAnimMontage; // 前向声明，避免不必要的头文件引用
@@ -26,6 +27,10 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	/** 播放换弹动画蒙太奇的函数 */
+    UFUNCTION(BlueprintCallable, Category = "Animation")
+    float PlayReloadMontage();
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	int MaxAmmo = 30;
@@ -45,22 +50,19 @@ protected:
 	// Reload Audio Component
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	UAudioComponent *ReloadAudioComponent;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	USceneComponent *MuzzleFromBP;
-
 	// 在蓝图中为它赋值
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
     UAudioComponent* ShootAudioComponent;
-
-	/** 播放换弹动画蒙太奇的函数 */
-    UFUNCTION(BlueprintCallable, Category = "Animation")
-    float PlayReloadMontage();
 
 	//换弹动画的蒙太奇资产，需要在蓝图中初始化
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation", meta = (AllowPrivateAccess = "true"))
     UAnimMontage* ReloadMontage;
 
+	// 存放子弹的对象池组件
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|ObjectPool")
+	UObjectPoolComponent *BulletPool;
 
 
 public:	
@@ -80,6 +82,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void Shoot();
+
+	// 获取两枪之间的射击间隔时间
+	float GetShootDuration();
 
 
 
