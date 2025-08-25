@@ -25,6 +25,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
 	AWeaponBase *CurrentWeapon;
 
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

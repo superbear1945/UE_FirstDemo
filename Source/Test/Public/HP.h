@@ -7,7 +7,7 @@
 #include "HP.generated.h"
 
 
-UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
+UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class TEST_API UHP : public UActorComponent
 {
 	GENERATED_BODY()
@@ -20,9 +20,16 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	
+	
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "HP")
+	float CurrentHP;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "HP")
+	float MaxHP;
 };
