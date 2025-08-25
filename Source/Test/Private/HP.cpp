@@ -19,8 +19,8 @@ UHP::UHP()
 void UHP::BeginPlay()
 {
 	Super::BeginPlay();
-	CurrentHP = MaxHP; // 初始化当前生命值
 
+	CurrentHP = MaxHP;
 	// ...
 	
 }
