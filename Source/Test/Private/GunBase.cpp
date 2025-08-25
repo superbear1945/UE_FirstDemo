@@ -4,6 +4,8 @@
 #include "GunBase.h"
 #include "Engine/TimerHandle.h"
 #include "Engine/World.h"
+#include "BulletBase.h"
+#include "MyCharacter.h"
 #include "TimerManager.h"
 
 // Sets default values
@@ -50,11 +52,6 @@ void AGunBase::ReloadDone()
 	IsReloading = false;
 	IsMagazineFull = true;
 	IsMagazineEmpty = false;
-}
-
-void AGunBase::StopShooting_Implementation()
-{
-	// Implement logic in Blueprint
 }
 
 float AGunBase::PlayReloadMontage()
@@ -121,7 +118,12 @@ void AGunBase::Shoot()
 	IsMagazineEmpty = (CurrentAmmo <= 0);
 	if(!IsMagazineEmpty && !IsReloading)
 	{
+		IsMagazineFull = false;
+		ShootAudioComponent->Play();
+		CurrentAmmo--;
+		SpawnBulletFromPool();
 
+		// 生成枪口火焰在蓝图中实现
 	}
 	else 
 	{
@@ -129,6 +131,52 @@ void AGunBase::Shoot()
 		if(IsReloading) return;
 		Reload();
 	}
+}
+
+void AGunBase::SpawnBulletFromPool()
+{
+	if(BulletPool == nullptr)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("BulletPool is not set in %s!"), *GetName());
+		return;
+	}
+
+	auto *BulletActor = BulletPool->GetActorFromPool();
+	
+	// 让子弹获取到对象池组件，以便它在命中后能归还自己
+	ABulletBase *Bullet = Cast<ABulletBase>(BulletActor);
+	Bullet->SetObjectPoolComponent(BulletPool);
+
+	// 设置子弹旋转和位置
+	BulletActor->SetActorLocation(MuzzleFromBP->GetComponentLocation());
+	
+	APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+	// 实现不瞄准时有扩散，瞄准才是百分比准的效果
+	if(Cast<AMyCharacter>(PlayerPawn)->GetIsAiming())
+	{
+		FRotator PlayerRotation = PlayerPawn->GetActorRotation();
+		FRotator BulletRotation = BulletActor->GetActorRotation();
+		BulletRotation.Yaw = PlayerRotation.Yaw;
+		BulletActor->SetActorRotation(BulletRotation);
+	}
+	else 
+	{
+		FRotator PlayerRotation = PlayerPawn->GetActorRotation();
+		FRotator BulletRotation = BulletActor->GetActorRotation();
+		float RandomSpread = FMath::RandRange(-HipFireSpreadYawAngle, HipFireSpreadYawAngle);
+		BulletRotation.Yaw = PlayerRotation.Yaw + RandomSpread;
+		BulletActor->SetActorRotation(BulletRotation);
+	}
+
+	// 设置子弹速度
+	FVector Direction = BulletActor->GetActorForwardVector();
+	Direction *= BulletSpeed;
+	Bullet->GetProjectileMovementComponent()->Velocity = Direction;
+}
+
+void AGunBase::StopShooting()
+{
+	ShootAudioComponent->Stop();
 }
 
 float AGunBase::GetShootDuration()

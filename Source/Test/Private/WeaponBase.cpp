@@ -16,7 +16,6 @@ void AWeaponBase::BeginPlay()
 {
 	Super::BeginPlay();
 	LoadWeaponData(); //在Event Begin时，加载Weapon DataTable中的数据
-	
 }
 
 void AWeaponBase::OnEquipped()
@@ -45,6 +44,9 @@ void AWeaponBase::LoadWeaponData()
             FireSpeed = DataRow->FireSpeed;
             MagazineCapacity = DataRow->MagazineCapacity;
             CurrentAmmo = DataRow->CurrentAmmo;
+            HipFireSpreadYawAngle = DataRow->HipFireSpreadYawAngle;
+            BulletSpeed = DataRow->BulletSpeed;
+            BulletClass = DataRow->BulletClass;
         }
     }
 	else if(!WeaponDataTable)

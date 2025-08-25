@@ -26,6 +26,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
 	AWeaponBase* CurrentWeapon;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
+	bool IsAiming;
+
 
 public:	
 	// Called every frame
@@ -40,6 +43,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Player")
 	void SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID);
+
+	bool GetIsAiming() const { return IsAiming; }
 
 private:
     

@@ -6,16 +6,21 @@
 #include "Components/AudioComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "NiagaraComponentPool.h"
+#include "NiagaraSystem.h"
+#include "NiagaraFunctionLibrary.h"
 #include "WeaponBase.h"
 #include "UObject/ObjectMacros.h"
+#include "NiagaraComponent.h"
 #include "StopShooting.h"
 #include "ObjectPoolComponent.h"
+#include "MyCharacter.h"
 #include "GunBase.generated.h"
 
 class UAnimMontage; // 前向声明，避免不必要的头文件引用
 
 UCLASS()
-class TEST_API AGunBase : public AWeaponBase, public IStopShooting
+class TEST_API AGunBase : public AWeaponBase
 {
 	GENERATED_BODY()
 	
@@ -28,9 +33,13 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	/** 播放换弹动画蒙太奇的函数 */
-    UFUNCTION(BlueprintCallable, Category = "Animation")
+	// 播放换弹动画蒙太奇的函数
+    UFUNCTION(BlueprintCallable, Category = "GunBase|Animation")
     float PlayReloadMontage();
+
+	// 从对象池中生成子弹，在Shoot方法中被调用
+	void SpawnBulletFromPool();
+
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	int MaxAmmo = 30;
@@ -47,14 +56,16 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	float ReloadTime = 2.0f; // Reload time in seconds
 
+	// 需要在蓝图中赋值↓
 	// Reload Audio Component
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	UAudioComponent *ReloadAudioComponent;
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	USceneComponent *MuzzleFromBP;
-	// 在蓝图中为它赋值
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
     UAudioComponent* ShootAudioComponent;
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
+	UNiagaraSystem *MuzzleFireEffect;
 
 	//换弹动画的蒙太奇资产，需要在蓝图中初始化
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation", meta = (AllowPrivateAccess = "true"))
@@ -64,6 +75,7 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|ObjectPool")
 	UObjectPoolComponent *BulletPool;
 
+	
 
 public:	
 	// Called every frame
@@ -83,15 +95,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void Shoot();
 
+	UFUNCTION(BlueprintCallable, Category = "GunBase")
+	void StopShooting();
+
 	// 获取两枪之间的射击间隔时间
 	float GetShootDuration();
 
-
-
 	virtual void Attack() override;
-
-	virtual void StopShooting_Implementation() override;
-
 private:
 	
 

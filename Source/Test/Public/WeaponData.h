@@ -6,6 +6,7 @@
 #include "Engine/DataTable.h"
 #include "PaperSprite.h"
 #include "ShowFlags.h"
+#include "BulletBase.h"
 #include "WeaponData.generated.h"
 
 UENUM(BlueprintType)
@@ -63,6 +64,10 @@ public:
 
     
     // 远程武器特有属性
+    // 子弹类别
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "RangedWeapon")
+    TSoftClassPtr<class ABulletBase> BulletClass;
+
     // 射速
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
     float FireSpeed;
@@ -74,4 +79,14 @@ public:
     // 当前弹药数量
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
     int CurrentAmmo;
+
+    // 腰射时子弹偏移角度
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
+    float HipFireSpreadYawAngle;
+
+    // 子弹初速度
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
+    float BulletSpeed;
+
+    
 };

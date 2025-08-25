@@ -36,51 +36,49 @@ protected:
 	// UI中显示的图标
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")
     UPaperSprite *Icon;
-    
     // 重量
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")
     float Weight;
-
     // 价格
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")
     int32 Price;
-
+    
     // 武器类特有属性
     // 武器的蓝图类
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
     TSoftClassPtr<AWeaponBase> WeaponBP;
-
     // 基础伤害值
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
     float Damage;
-
     // 攻击范围
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
     float AttackRange;
-
     // 武器类型
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
     EWeaponType WeaponType;
-
     //各个武器相对于角色武器插槽的偏移
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties")
 	FTransform SocketOffSet;
-
     
     // 远程武器特有属性
+    // 子弹类别
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GunBase")
+    TSoftClassPtr<class ABulletBase> BulletClass;
     // 射速
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
     float FireSpeed;
-
     // 弹夹容量
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
     int MagazineCapacity;
-
     // 当前弹药数量
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
     int CurrentAmmo;
-
-	
+    // 腰射时子弹偏移角度
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
+    float HipFireSpreadYawAngle;
+    // 子弹初速度
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
+    float BulletSpeed;
 
 private:
 	void LoadWeaponData(); //加载DataTable中的数据

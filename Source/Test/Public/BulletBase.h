@@ -7,6 +7,7 @@
 #include "ObjectPoolComponent.h"
 #include "Poolable.h"
 #include "UObject/ObjectMacros.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "BulletBase.generated.h"
 
 class UObjectPoolComponent;
@@ -19,6 +20,7 @@ public:
 	// Sets default values for this actor's properties
 	ABulletBase();
 	GENERATED_BODY()
+
 	UFUNCTION(BlueprintCallable, Category="Bullet")
 	void HitZombie();
 
@@ -30,7 +32,8 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Object Pool")
 	UObjectPoolComponent* ObjectPoolComponent;
 
-	
+	UPROPERTY(BlueprintReadWrite, Category = "Bullet")
+	UProjectileMovementComponent *ProjectileMovementComponent;
 
 public:	
 	// Called every frame
@@ -38,4 +41,14 @@ public:
 
 	virtual void OnPoolBegin_Implementation() override;
 	virtual void OnPoolEnd_Implementation() override;
+
+	void SetObjectPoolComponent(UObjectPoolComponent* PoolComponent)
+	{
+		ObjectPoolComponent = PoolComponent;
+	}
+
+	UProjectileMovementComponent *GetProjectileMovementComponent() const
+	{
+		return ProjectileMovementComponent;
+	}
 };
