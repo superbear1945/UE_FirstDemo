@@ -64,3 +64,7 @@ void AWeaponBase::Tick(float DeltaTime)
 
 }
 
+void AWeaponBase::Attack()
+{
+    // Each weapon will implement its own attack logic
+}

@@ -72,6 +72,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void Shoot();
 
+	virtual void Attack() override;
+
 	virtual void StopShooting_Implementation() override;
 
 private:

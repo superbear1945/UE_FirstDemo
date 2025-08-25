@@ -89,10 +89,13 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-    
-    UFUNCTION(BlueprintCallable, Category = "Default")
     // 装备武器时，调整位置插槽等
+    UFUNCTION(BlueprintCallable, Category = "Default")
     virtual void OnEquipped();
+
+    // 每个武器都要拥有攻击方法
+	UFUNCTION(BlueprintCallable, Category = "GunBase")
+	virtual void Attack();
 
     // C++ Getters for Weapon Properties
     UPaperSprite* GetIcon() const { return Icon; }

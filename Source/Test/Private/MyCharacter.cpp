@@ -47,15 +47,29 @@ void AMyCharacter::Attack()
 
 void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
 {
-	if (WeaponDataTable == nullptr || WeaponID.IsNone()) return;
+    if (WeaponDataTable == nullptr || WeaponID.IsNone()) return;
 
-	static const FString ContextString(TEXT("Player Switch Weapon"));
-	
-	//查找武器数据
+    // 如果当前有武器，先销毁它
+    if (CurrentWeapon)
+    {
+        CurrentWeapon->Destroy();
+        CurrentWeapon = nullptr;
+    }
+
+    static const FString ContextString(TEXT("Player Switch Weapon"));
+    
+    // 1. 查找武器数据
     FWeaponData* DataRow = WeaponDataTable->FindRow<FWeaponData>(WeaponID, ContextString, true);
-	if(!DataRow) return;
+    if(!DataRow) return;
 
-	// 切换逻辑，更改CurrentWeapon指向等
-	CurrentWeapon = DataRow->WeaponClass;
+    // 2. 从数据中获取武器类
+    TSoftClassPtr<AWeaponBase> WeaponClassPtr = DataRow->WeaponClass;
+    if (WeaponClassPtr.IsNull()) return;
+
+    // 3. 加载类并生成武器实例 (这里使用同步加载作为示例)
+    if (UClass* WeaponClassToSpawn = WeaponClassPtr.LoadSynchronous())
+    {
+        CurrentWeapon = GetWorld()->SpawnActor<AWeaponBase>(WeaponClassToSpawn);
+    }
 }
 

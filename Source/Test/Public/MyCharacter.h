@@ -21,9 +21,9 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Player")
-	TSoftClassPtr<AWeaponBase> CurrentWeapon;
+	// 指向当前装备的武器实例。UPROPERTY()宏可以防止它被垃圾回收。
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Weapon")
+	AWeaponBase* CurrentWeapon;
 
 
 public:	
