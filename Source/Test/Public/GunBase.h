@@ -71,7 +71,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void Reload();
 
-	// 上弹蒙太奇结束时的回调函数
+	// 换弹蒙太奇上弹结束通知的回调函数
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void ReloadDone();
 

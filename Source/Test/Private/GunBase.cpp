@@ -2,7 +2,9 @@
 
 
 #include "GunBase.h"
+#include "Engine/TimerHandle.h"
 #include "Engine/World.h"
+#include "TimerManager.h"
 
 // Sets default values
 AGunBase::AGunBase()
@@ -44,7 +46,7 @@ bool AGunBase::GetIsReloading()
 
 void AGunBase::ReloadDone()
 {
-	MaxAmmo = CurrentAmmo;
+	CurrentAmmo = MaxAmmo;
 	IsReloading = false;
 	IsMagazineFull = true;
 	IsMagazineEmpty = false;
@@ -97,7 +99,9 @@ float AGunBase::PlayReloadMontage()
 
 void AGunBase::Attack()
 {
-	Shoot();
+	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
+	FTimerHandle ShootTimerHandle; // 定义一个定时器句柄，用于后续全自动武器射击的逻辑
+	TimeManager.GetTimerRemaining(ShootTimerHandle);
 }
 
 void AGunBase::Shoot()

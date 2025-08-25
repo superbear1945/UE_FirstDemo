@@ -23,7 +23,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	// 指向当前装备的武器实例。UPROPERTY()宏可以防止它被垃圾回收。
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Player|Weapon")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
 	AWeaponBase* CurrentWeapon;
 
 
