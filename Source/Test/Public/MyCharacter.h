@@ -9,6 +9,9 @@
 #include "WeaponBase.h"
 #include "MyCharacter.generated.h"
 
+// 切换武器时使用的委托
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSwitchWeaponSignature, AWeaponBase*, NewWeapon);
+
 UCLASS()
 class TEST_API AMyCharacter : public ACharacter
 {
@@ -17,6 +20,10 @@ class TEST_API AMyCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AMyCharacter();
+
+	
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnSwitchWeaponSignature OnSwitchWeapon; // 切换武器时触发的委托
 	
 protected:
 	// Called when the game starts or when spawned

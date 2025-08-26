@@ -70,17 +70,17 @@ void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
     {
         CurrentWeapon = GetWorld()->SpawnActor<AWeaponBase>(WeaponClassToSpawn);
     }
+    if (!CurrentWeapon) return;
 
     // 将武器附着在角色的RightWeaponSocket插槽上
-    if (CurrentWeapon)
-    {
-        CurrentWeapon->AttachToComponent(
-        GetMesh(), 
-        FAttachmentTransformRules::SnapToTargetIncludingScale, 
-        TEXT("RightWeaponSocket"));
-    }
-    
+    CurrentWeapon->AttachToComponent(
+    GetMesh(), 
+    FAttachmentTransformRules::SnapToTargetIncludingScale, 
+    TEXT("RightWeaponSocket"));
+
     //通过武器中事先设置好的偏移调整武器位置
     CurrentWeapon->AddActorLocalTransform(CurrentWeapon->GetSocketOffSet());
+
+    OnSwitchWeapon.Broadcast(CurrentWeapon);
 }
 
