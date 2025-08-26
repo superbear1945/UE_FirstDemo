@@ -9,6 +9,7 @@
 #include "BulletBase.h"
 #include "WeaponData.generated.h"
 
+
 UENUM(BlueprintType)
 enum class EWeaponType : uint8
 {
@@ -25,6 +26,8 @@ struct FWeaponData : public FTableRowBase // 必须继承自FTableRowBase
     GENERATED_BODY()
 
 public:
+
+
     // 物品ID名称
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item Properties")
     FName ItemID;

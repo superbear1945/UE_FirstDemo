@@ -9,6 +9,10 @@
 #include "WeaponData.h"
 #include "WeaponBase.generated.h"
 
+// 攻击事件分发器
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttackSignature, AWeaponBase*, NewWeapon);
+
+
 UCLASS()
 class TEST_API AWeaponBase : public AActor
 {
@@ -17,6 +21,10 @@ class TEST_API AWeaponBase : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AWeaponBase();
+
+    // 攻击时调用的委托
+	UPROPERTY(BlueprintAssignable, Category = "Events")
+	FOnAttackSignature OnAttack;
 
 protected:
 	// Called when the game starts or when spawned
