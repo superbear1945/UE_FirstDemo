@@ -117,6 +117,7 @@ void AGunBase::Attack()
 	if(AutoShootRemainingTime > 0) return;
 
 	Shoot(); // 调用Attack且不处于两枪中间的间隙时立刻开火，随后开始全自动射击的逻辑
+	ShootAudioComponent->Play(); // 播放射击音效
 
 	// 通过一个开启循环的定时器来实现全自动射击
 	TimeManager.SetTimer(ShootTimerHandle,
@@ -132,7 +133,6 @@ void AGunBase::Shoot_Implementation()
 	if(!IsMagazineEmpty && !IsReloading)
 	{
 		IsMagazineFull = false;
-		ShootAudioComponent->Play();
 		CurrentAmmo--;
 		SpawnBulletFromPool();
 
@@ -191,7 +191,11 @@ void AGunBase::SpawnBulletFromPool()
 
 void AGunBase::StopShooting()
 {
-	ShootAudioComponent->Stop(); // 停止枪声
+	// 停止枪声音效
+    if (ShootAudioComponent)
+    {
+        ShootAudioComponent->Stop();
+    }
 	
 	// 在定时器计时结束后清空计时器
 	if(!ShootTimerHandle.IsValid()) return;
