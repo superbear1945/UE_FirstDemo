@@ -62,7 +62,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties")
 	FTransform SocketOffSet;
 
-    
+    // 各个武器的攻击音效
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties")
+    USoundBase* AttackSound;
+
     // 远程武器特有属性
     // 子弹类别
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "RangedWeapon")

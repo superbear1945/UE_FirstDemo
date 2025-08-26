@@ -47,6 +47,7 @@ void AWeaponBase::LoadWeaponData()
             HipFireSpreadYawAngle = DataRow->HipFireSpreadYawAngle;
             BulletSpeed = DataRow->BulletSpeed;
             BulletClass = DataRow->BulletClass;
+            AttackSound = DataRow->AttackSound;
         }
     }
 	else if(!WeaponDataTable)
