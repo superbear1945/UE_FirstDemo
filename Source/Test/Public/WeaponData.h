@@ -91,5 +91,9 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
     float BulletSpeed;
 
+    // 是否装备消音器
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
+    bool bHasSilencer;
+
     
 };

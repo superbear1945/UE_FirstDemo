@@ -81,7 +81,6 @@ protected:
 
 	// 定义一个定时器句柄，用于全自动武器射击的逻辑
 	FTimerHandle ShootTimerHandle; 
-	void StopShootTimerHandle(); // 关闭射击定时器的函数
 
 public:	
 	// Called every frame

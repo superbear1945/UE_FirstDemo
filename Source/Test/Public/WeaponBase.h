@@ -82,6 +82,9 @@ protected:
     // 子弹初速度
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
     float BulletSpeed;
+    // 是否装备消音器
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
+    bool bHasSilencer;
 
 private:
 	void LoadWeaponData(); //加载DataTable中的数据

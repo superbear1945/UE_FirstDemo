@@ -48,6 +48,7 @@ void AWeaponBase::LoadWeaponData()
             BulletSpeed = DataRow->BulletSpeed;
             BulletClass = DataRow->BulletClass;
             AttackSound = DataRow->AttackSound;
+            bHasSilencer = DataRow->bHasSilencer;
         }
     }
 	else if(!WeaponDataTable)

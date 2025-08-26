@@ -21,6 +21,7 @@ AGunBase::AGunBase()
 void AGunBase::BeginPlay()
 {
 	Super::BeginPlay();
+	ShootAudioComponent->Sound = AttackSound; //将射击音效设置为DataTable中的音效
 }
 
 // Called every frame
@@ -109,22 +110,22 @@ float AGunBase::PlayReloadMontage()
 
 void AGunBase::Attack()
 {
-	if(IsReloading || IsMagazineEmpty) return; // 换弹或没子弹时不能开枪
-	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
+    // 1. 如果定时器句柄当前是有效的（即正在冷却中），则直接返回。
+    if (GetWorld()->GetTimerManager().IsTimerActive(ShootTimerHandle))
+    {
+        return;
+    }
 
-	// 获取当前定时器剩余时间，如果大于0说明现在处于两枪中间的间隙，此时不能开枪
-	float AutoShootRemainingTime = TimeManager.GetTimerRemaining(ShootTimerHandle);
-	if(AutoShootRemainingTime > 0) return;
+    // 2. 检查其他条件
+    if(IsReloading || IsMagazineEmpty) return;
 
-	Shoot(); // 调用Attack且不处于两枪中间的间隙时立刻开火，随后开始全自动射击的逻辑
-	ShootAudioComponent->Play(); // 播放射击音效
+    // 3. 立即开火
+    Shoot();
+    
 
-	// 通过一个开启循环的定时器来实现全自动射击
-	TimeManager.SetTimer(ShootTimerHandle,
-						this,
-						&AGunBase::Shoot,
-						GetShootDuration(),
-						true);
+    // 4. 设置一个一次性的定时器，作为射击间隔。
+    //    我们不再需要循环定时器，因为增强输入会为我们处理按住的情况。
+    GetWorld()->GetTimerManager().SetTimer(ShootTimerHandle, GetShootDuration(), false);
 }
 
 void AGunBase::Shoot_Implementation()
@@ -134,6 +135,11 @@ void AGunBase::Shoot_Implementation()
 	{
 		IsMagazineFull = false;
 		CurrentAmmo--;
+		// 播放射击音效
+		if (ShootAudioComponent && !ShootAudioComponent->IsPlaying())
+    	{
+    	    ShootAudioComponent->Play();
+    	}
 		SpawnBulletFromPool();
 
 		// 生成枪口火焰在蓝图中实现
@@ -191,31 +197,13 @@ void AGunBase::SpawnBulletFromPool()
 
 void AGunBase::StopShooting()
 {
-	// 停止枪声音效
     if (ShootAudioComponent)
     {
         ShootAudioComponent->Stop();
     }
-	
-	// 在定时器计时结束后清空计时器
-	if(!ShootTimerHandle.IsValid()) return;
-
-	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
-	TimeManager.SetTimer
-	(
-		ShootTimerHandle, 
-		this, 
-		&AGunBase::StopShootTimerHandle, 
-		TimeManager.GetTimerRemaining(ShootTimerHandle), 
-		false
-	);
 }
 
-void AGunBase::StopShootTimerHandle()
-{
-	FTimerManager &TimeManager = GetWorld()->GetTimerManager();
-	TimeManager.ClearTimer(ShootTimerHandle);
-}
+
 
 float AGunBase::GetShootDuration()
 {
