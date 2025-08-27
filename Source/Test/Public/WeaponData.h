@@ -49,6 +49,10 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
     TSoftClassPtr<class AWeaponBase> WeaponClass;
 
+    // 武器的静态网格体
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
+    TSoftObjectPtr<UStaticMesh> WeaponMesh;
+
     // 基础伤害值
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
     float Damage;
