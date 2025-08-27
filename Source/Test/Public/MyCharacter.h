@@ -11,7 +11,8 @@
 
 // 切换武器时使用的委托
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSwitchWeaponSignature, AWeaponBase*, NewWeapon);
-
+// 换弹结束的委托
+//DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnReloadFinishedSignature, AWeaponBase*, ReloadedWeapon);
 
 UCLASS()
 class TEST_API AMyCharacter : public ACharacter

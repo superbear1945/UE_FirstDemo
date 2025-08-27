@@ -66,6 +66,8 @@ void AGunBase::ReloadDone()
 	IsReloading = false;
 	IsMagazineFull = true;
 	IsMagazineEmpty = false;
+
+	OnReloadFinish.Broadcast(); //广播换弹结束事件
 }
 
 float AGunBase::PlayReloadMontage()

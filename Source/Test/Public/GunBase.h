@@ -17,6 +17,8 @@
 #include "MyCharacter.h"
 #include "GunBase.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnReloadFinishSignature);
+
 class UAnimMontage; // 前向声明，避免不必要的头文件引用
 
 UCLASS()
@@ -27,7 +29,10 @@ class TEST_API AGunBase : public AWeaponBase
 public:	
 	// Sets default values for this actor's properties
 	AGunBase();
-	
+
+	// 换弹结束的事件
+	UPROPERTY(BlueprintAssignable, Category = "Event")
+	FOnReloadFinishSignature OnReloadFinish;
 
 protected:
 	// Called when the game starts or when spawned
