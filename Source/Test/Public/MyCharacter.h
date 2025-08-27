@@ -38,6 +38,8 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
 	bool IsAiming;
 
+	/** 当异步加载的武器类完成后被调用的函数 */
+	void OnWeaponLoadCompleted(TSoftClassPtr<AWeaponBase> LoadedWeaponClassPtr);
 
 public:	
 	// Called every frame

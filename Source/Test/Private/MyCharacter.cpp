@@ -5,6 +5,8 @@
 #include "Engine/DataTable.h"
 #include "WeaponBase.h"
 #include "WeaponData.h"
+#include "Engine/StreamableManager.h"
+#include "Engine/AssetManager.h"
 
 // Sets default values
 AMyCharacter::AMyCharacter()
@@ -65,22 +67,32 @@ void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
     TSoftClassPtr<AWeaponBase> WeaponClassPtr = DataRow->WeaponClass;
     if (WeaponClassPtr.IsNull()) return;
 
-    // 3. 加载类并生成武器实例 (这里使用同步加载作为示例)
-    if (UClass* WeaponClassToSpawn = WeaponClassPtr.LoadSynchronous())
-    {
-        CurrentWeapon = GetWorld()->SpawnActor<AWeaponBase>(WeaponClassToSpawn);
-    }
+    // 3. 【核心修改】发起异步加载请求，而不是同步加载
+    FStreamableManager& StreamableManager = UAssetManager::Get().GetStreamableManager();
+    StreamableManager.RequestAsyncLoad(WeaponClassPtr.ToSoftObjectPath(), FStreamableDelegate::CreateUObject(this, &AMyCharacter::OnWeaponLoadCompleted, WeaponClassPtr));
+}
+
+void AMyCharacter::OnWeaponLoadCompleted(TSoftClassPtr<AWeaponBase> LoadedWeaponClassPtr)
+{
+    // 1. 检查加载的类是否有效
+    UClass* WeaponClassToSpawn = LoadedWeaponClassPtr.Get();
+    if (!WeaponClassToSpawn) return;
+
+    // 2. 生成武器实例
+    CurrentWeapon = GetWorld()->SpawnActor<AWeaponBase>(WeaponClassToSpawn);
     if (!CurrentWeapon) return;
 
-    // 将武器附着在角色的RightWeaponSocket插槽上
+    // 3. 将武器附着在角色的RightWeaponSocket插槽上
     CurrentWeapon->AttachToComponent(
-    GetMesh(), 
-    FAttachmentTransformRules::SnapToTargetIncludingScale, 
-    TEXT("RightWeaponSocket"));
+        GetMesh(), 
+        FAttachmentTransformRules::SnapToTargetIncludingScale, 
+        TEXT("RightWeaponSocket")
+    );
 
-    //通过武器中事先设置好的偏移调整武器位置
+    // 4. 通过武器中事先设置好的偏移调整武器位置
     CurrentWeapon->AddActorLocalTransform(CurrentWeapon->GetSocketOffSet());
 
+    // 5. 广播事件
     OnSwitchWeapon.Broadcast(CurrentWeapon);
 }
 
