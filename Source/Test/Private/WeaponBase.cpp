@@ -2,6 +2,10 @@
 
 
 #include "WeaponBase.h"
+#include "UObject/SoftObjectPath.h"
+#include "Engine/StreamableManager.h"
+#include "Engine/AssetManager.h"
+#include "GunBase.h"
 #include "WeaponData.h"
 
 // Sets default values
@@ -15,7 +19,7 @@ AWeaponBase::AWeaponBase()
 void AWeaponBase::BeginPlay()
 {
 	Super::BeginPlay();
-	LoadWeaponData(); //在Event Begin时，加载Weapon DataTable中的数据
+	StartLoadWeaponData(); //在Event Begin时，加载Weapon DataTable中的数据
 }
 
 void AWeaponBase::OnEquipped()
@@ -23,7 +27,7 @@ void AWeaponBase::OnEquipped()
     // 装备武器时需要做的操作，例如调整位置旋转等
 }
 
-void AWeaponBase::LoadWeaponData()
+void AWeaponBase::StartLoadWeaponData()
 {
     UE_LOG(LogTemp, Warning, TEXT("%s: Loading weapon data..."), *GetName());
     if (WeaponDataTable != nullptr && !WeaponID.IsNone())
@@ -33,10 +37,16 @@ void AWeaponBase::LoadWeaponData()
 
         if (DataRow)    
         {
-            Icon = DataRow->Icon;
+            // 将资产软指针路径添加到AssetPaths中，后面开启异步加载资产时使用
+            TArray<FSoftObjectPath> AssetPaths;
+            AssetPaths.Add(DataRow->Icon.ToSoftObjectPath());
+            AssetPaths.Add(DataRow->AttackSound.ToSoftObjectPath());
+            AssetPaths.Add(DataRow->BulletClass.ToSoftObjectPath());
+            AssetPaths.Add(DataRow->WeaponMesh.ToSoftObjectPath());
+            
+            // 读取非指针内容
             Weight = DataRow->Weight;
             Price = DataRow->Price;
-            WeaponBP = DataRow->WeaponClass;
             Damage = DataRow->Damage;
             AttackRange = DataRow->AttackRange;
             WeaponType = DataRow->WeaponType;
@@ -46,10 +56,17 @@ void AWeaponBase::LoadWeaponData()
             CurrentAmmo = DataRow->CurrentAmmo;
             HipFireSpreadYawAngle = DataRow->HipFireSpreadYawAngle;
             BulletSpeed = DataRow->BulletSpeed;
-            BulletClass = DataRow->BulletClass;
-            AttackSound = DataRow->AttackSound;
             bHasSilencer = DataRow->bHasSilencer;
-            WeaponMesh = DataRow->WeaponMesh;
+
+            // 发起异步加载AssetPaths的请求，回调函数为OnWeaponDataLoaded
+            FStreamableManager& StreamableManager = UAssetManager::Get().GetStreamableManager();
+            StreamableManager.RequestAsyncLoad(
+                AssetPaths, 
+                FStreamableDelegate::CreateUObject(
+                    this, 
+                    &AWeaponBase::OnWeaponDataLoaded
+                    )
+                );
         }
     }
 	else if(!WeaponDataTable)
@@ -60,6 +77,31 @@ void AWeaponBase::LoadWeaponData()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%s: WeaponID is not set in AWeaponBase!"), *GetName());
 	}
+}
+
+void AWeaponBase::OnWeaponDataLoaded()
+{
+    // 再次获取数据行
+    if (WeaponDataTable == nullptr || WeaponID.IsNone()) return;
+    static const FString ContextString(TEXT("Weapon Data"));
+    FWeaponData* DataRow = WeaponDataTable->FindRow<FWeaponData>(WeaponID, ContextString, true);
+    if (!DataRow) return;
+
+    // 获取加载完成的资产的硬指针并赋值
+    LoadedIcon = DataRow->Icon.Get(); 
+    LoadedAttackSound = DataRow->AttackSound.Get(); 
+    LoadedWeaponMesh = DataRow->WeaponMesh.Get(); 
+    LoadedBulletClass = DataRow->BulletClass.Get(); 
+
+    if (AGunBase* Gun = Cast<AGunBase>(this))
+    {
+        if (Gun->GetShootAudioComponent())
+        {
+            Gun->SetShootSound(LoadedAttackSound);
+        }
+    }
+
+    OnWeaponAssetsLoaded.Broadcast(); // 广播资产加载完成事件
 }
 
 // Called every frame

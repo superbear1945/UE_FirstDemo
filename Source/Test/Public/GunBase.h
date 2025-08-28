@@ -115,6 +115,9 @@ public:
 	// 获取两枪之间的射击间隔时间
 	float GetShootDuration();
 
+	UAudioComponent* GetShootAudioComponent() const { return ShootAudioComponent; }
+	void SetShootSound(USoundBase* newSound) { ShootAudioComponent->SetSound(newSound); }
+
 	virtual void Attack() override;
 private:
 	

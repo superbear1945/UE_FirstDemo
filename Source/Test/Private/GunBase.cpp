@@ -21,7 +21,6 @@ AGunBase::AGunBase()
 void AGunBase::BeginPlay()
 {
 	Super::BeginPlay();
-	ShootAudioComponent->Sound = AttackSound; //将射击音效设置为DataTable中的音效
 }
 
 // Called every frame
@@ -46,12 +45,11 @@ void AGunBase::Reload()
 {
 	IsReloading = true;
 	
-	if (ReloadAudioComponent)
+	ReloadTime = PlayReloadMontage();
+	if(ReloadAudioComponent)
 	{
 		ReloadAudioComponent->Play();
 	}
-	
-	ReloadTime = PlayReloadMontage();
 	StopShooting(); // 换弹时停止射击
 }
 

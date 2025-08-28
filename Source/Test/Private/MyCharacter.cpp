@@ -92,7 +92,7 @@ void AMyCharacter::OnWeaponLoadCompleted(TSoftClassPtr<AWeaponBase> LoadedWeapon
     // 4. 通过武器中事先设置好的偏移调整武器位置
     CurrentWeapon->AddActorLocalTransform(CurrentWeapon->GetSocketOffSet());
 
-    // 5. 广播事件
+    // 5. 广播切换武器的事件
     OnSwitchWeapon.Broadcast(CurrentWeapon);
 }
 
