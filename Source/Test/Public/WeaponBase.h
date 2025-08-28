@@ -2,6 +2,9 @@
 
 #pragma once
 
+#include "Components/AudioComponent.h"
+#include "Components/SceneComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "UObject/ObjectMacros.h"
@@ -36,6 +39,17 @@ public:
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
+
+    // 初始的组件↓
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")
+    USceneComponent *RootSceneComponent;
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")
+    UStaticMeshComponent *WeaponMeshComponent;
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")
+    UAudioComponent *AttackAudioComponent;
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")
+    UAudioComponent *ReloadAudioComponent;
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")
 
 
     //要使用的武器数据资产

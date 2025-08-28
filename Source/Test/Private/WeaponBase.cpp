@@ -29,10 +29,12 @@ void AWeaponBase::OnEquipped()
 
 void AWeaponBase::StartLoadWeaponData()
 {
-    UE_LOG(LogTemp, Warning, TEXT("%s: Loading weapon data..."), *GetName());
+    UE_LOG(LogTemp, Warning, TEXT("调用StartLoadWeaponData: %f"), GetWorld()->GetTimeSeconds());
+
     if (WeaponDataTable != nullptr && !WeaponID.IsNone())
     {
         static const FString ContextString(TEXT("Weapon Data"));
+        
         FWeaponData* DataRow = WeaponDataTable->FindRow<FWeaponData>(WeaponID, ContextString, true);
 
         if (DataRow)    
@@ -58,6 +60,9 @@ void AWeaponBase::StartLoadWeaponData()
             BulletSpeed = DataRow->BulletSpeed;
             bHasSilencer = DataRow->bHasSilencer;
 
+
+            
+            UE_LOG(LogTemp, Warning, TEXT("异步加载AssetPaths前: %f"), GetWorld()->GetTimeSeconds());
             // 发起异步加载AssetPaths的请求，回调函数为OnWeaponDataLoaded
             FStreamableManager& StreamableManager = UAssetManager::Get().GetStreamableManager();
             StreamableManager.RequestAsyncLoad(
@@ -81,17 +86,22 @@ void AWeaponBase::StartLoadWeaponData()
 
 void AWeaponBase::OnWeaponDataLoaded()
 {
+    UE_LOG(LogTemp, Warning, TEXT("再次读取数据行前: %f"), GetWorld()->GetTimeSeconds());
     // 再次获取数据行
     if (WeaponDataTable == nullptr || WeaponID.IsNone()) return;
     static const FString ContextString(TEXT("Weapon Data"));
     FWeaponData* DataRow = WeaponDataTable->FindRow<FWeaponData>(WeaponID, ContextString, true);
     if (!DataRow) return;
+    UE_LOG(LogTemp, Warning, TEXT("再次读取数据行后：%f"), GetWorld()->GetTimeSeconds());
 
+
+    UE_LOG(LogTemp, Warning, TEXT("调用Get方法前: %f"), GetWorld()->GetTimeSeconds());
     // 获取加载完成的资产的硬指针并赋值
     LoadedIcon = DataRow->Icon.Get(); 
     LoadedAttackSound = DataRow->AttackSound.Get(); 
     LoadedWeaponMesh = DataRow->WeaponMesh.Get(); 
     LoadedBulletClass = DataRow->BulletClass.Get(); 
+    UE_LOG(LogTemp, Warning, TEXT("调用Get方法后: %f"), GetWorld()->GetTimeSeconds());
 
     if (AGunBase* Gun = Cast<AGunBase>(this))
     {
