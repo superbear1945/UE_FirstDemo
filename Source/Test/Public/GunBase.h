@@ -38,9 +38,7 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	// 默认拥有的组件↓
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|Component")
-	UAudioComponent *ReloadAudioComponent;
+	
 
 	// 播放换弹动画蒙太奇的函数
     UFUNCTION(BlueprintCallable, Category = "GunBase|Animation")

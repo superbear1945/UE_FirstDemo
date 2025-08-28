@@ -133,7 +133,6 @@ void AGunBase::Shoot_Implementation()
 	IsMagazineEmpty = (CurrentAmmo <= 0);
 	if(!IsMagazineEmpty && !IsReloading)
 	{
-		OnAttack.Broadcast(this); //广播攻击事件
 		IsMagazineFull = false;
 		CurrentAmmo--;
 		// 播放射击音效
@@ -142,7 +141,7 @@ void AGunBase::Shoot_Implementation()
     	    ShootAudioComponent->Play();
     	}
 		SpawnBulletFromPool();
-
+		OnAttack.Broadcast(this); //广播攻击事件
 		// 生成枪口火焰在蓝图中实现
 		
 	}
