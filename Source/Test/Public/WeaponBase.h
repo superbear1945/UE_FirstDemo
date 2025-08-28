@@ -47,9 +47,6 @@ protected:
     UStaticMeshComponent *WeaponMeshComponent;
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")
     UAudioComponent *AttackAudioComponent;
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")
-    UAudioComponent *ReloadAudioComponent;
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")
 
 
     //要使用的武器数据资产
