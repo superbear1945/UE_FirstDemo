@@ -5,6 +5,7 @@
 #include "Components/AudioComponent.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "UObject/UnrealType.h"
 #include "WeaponBase.h"
 #include "MyCharacter.generated.h"
@@ -38,6 +39,16 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player|Weapon")
 	bool IsAiming;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player")
+	bool bIsSprinting;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player")
+	float WalkSpeed = 200;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player")
+	float JogSpeed = 400;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Player")
+	float SprintSpeed = 660;
+
 	/** 当异步加载的武器类完成后被调用的函数 */
 	void OnWeaponLoadCompleted(TSoftClassPtr<AWeaponBase> LoadedWeaponClassPtr);
 
@@ -55,8 +66,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Player")
 	void SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID);
 
+	UFUNCTION(BlueprintCallable, Category = "Player")
+	void StartSprint();
+
+	UFUNCTION(BlueprintCallable, Category = "Player")
+	void StopSprint();
+
 	bool GetIsAiming() const { return IsAiming; }
 
 private:
-    
+    UCharacterMovementComponent *CharacterMovementComponent;
 };

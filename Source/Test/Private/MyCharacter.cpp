@@ -3,9 +3,11 @@
 
 #include "MyCharacter.h"
 #include "Engine/DataTable.h"
+#include "GameFramework/Pawn.h"
 #include "WeaponBase.h"
 #include "WeaponData.h"
 #include "Engine/StreamableManager.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Engine/AssetManager.h"
 
 
@@ -15,6 +17,7 @@ AMyCharacter::AMyCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+    CharacterMovementComponent = GetCharacterMovement();
 }
 
 // Called when the game starts or when spawned
@@ -46,9 +49,28 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 void AMyCharacter::Attack()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Hello"));
+
 }
 
+void AMyCharacter::StartSprint()
+{
+    if(bIsSprinting) return; // 已经在冲刺就不能再冲刺
+    bIsSprinting = true;
+
+    if(!CharacterMovementComponent) return;
+    CharacterMovementComponent->MaxWalkSpeed = SprintSpeed;
+    CharacterMovementComponent->bOrientRotationToMovement = true; // 冲刺时角色面朝移动方向
+}
+
+void AMyCharacter::StopSprint()
+{
+    if(!bIsSprinting) return; // 已经不在冲刺就不能停止冲刺
+    bIsSprinting = false;
+
+    if(!CharacterMovementComponent) return;
+    CharacterMovementComponent->MaxWalkSpeed = JogSpeed;
+    CharacterMovementComponent->bOrientRotationToMovement = false; // 不冲刺时角色面朝鼠标方向
+}
 
 
 void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
@@ -74,7 +96,6 @@ void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
 
 
 
-    UE_LOG(LogTemp, Warning, TEXT("异步加载WeaponClassPtr前: %f"), GetWorld()->GetTimeSeconds());
     // 3. 【核心修改】发起异步加载请求，而不是同步加载
     FStreamableManager& StreamableManager = UAssetManager::Get().GetStreamableManager();
     StreamableManager.RequestAsyncLoad(WeaponClassPtr.ToSoftObjectPath(), FStreamableDelegate::CreateUObject(this, &AMyCharacter::OnWeaponLoadCompleted, WeaponClassPtr));
@@ -82,10 +103,8 @@ void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
 
 void AMyCharacter::OnWeaponLoadCompleted(TSoftClassPtr<AWeaponBase> LoadedWeaponClassPtr)
 {
-    UE_LOG(LogTemp, Warning, TEXT("异步加载WeaponClassPtr后: %f"), GetWorld()->GetTimeSeconds());
     
-    
-    UE_LOG(LogTemp, Warning, TEXT("调用LoadedWeaponClassPtr.Get()前：%f"), GetWorld()->GetTimeSeconds());
+
     // 1. 检查加载的类是否有效
     UClass* WeaponClassToSpawn = LoadedWeaponClassPtr.Get();
     if (!WeaponClassToSpawn) return;
@@ -95,7 +114,6 @@ void AMyCharacter::OnWeaponLoadCompleted(TSoftClassPtr<AWeaponBase> LoadedWeapon
     // 2. 生成武器实例
     CurrentWeapon = GetWorld()->SpawnActor<AWeaponBase>(WeaponClassToSpawn);
     if (!CurrentWeapon) return;
-    UE_LOG(LogTemp, Warning, TEXT("调用LoadedWeaponClassPtr.Get()后：%f"), GetWorld()->GetTimeSeconds());
 
 
     // 3. 将武器附着在角色的RightWeaponSocket插槽上
