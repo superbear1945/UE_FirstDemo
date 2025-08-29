@@ -39,6 +39,8 @@ public:
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
+    // 用于给各个组件初始化内容
+    virtual void InitComponent();
 
     // 初始的组件↓
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Weapon|Component")

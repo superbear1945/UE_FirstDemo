@@ -13,6 +13,7 @@ AWeaponBase::AWeaponBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 }
 
 // Called when the game starts or when spawned
@@ -100,6 +101,15 @@ void AWeaponBase::OnWeaponDataLoaded()
     LoadedWeaponMesh = DataRow->WeaponMesh.Get(); 
     LoadedBulletClass = DataRow->BulletClass.Get(); 
 
+    // 使用已加载的资产为各个组件赋值
+    InitComponent();
+
+    OnWeaponAssetsLoaded.Broadcast(); // 广播资产加载完成事件
+}
+
+void AWeaponBase::InitComponent()
+{
+    // 设置枪声
     if (AGunBase* Gun = Cast<AGunBase>(this))
     {
         if (Gun->GetShootAudioComponent())
@@ -108,7 +118,11 @@ void AWeaponBase::OnWeaponDataLoaded()
         }
     }
 
-    OnWeaponAssetsLoaded.Broadcast(); // 广播资产加载完成事件
+    // 设置武器静态网格体
+    if (WeaponMeshComponent != nullptr)
+    {
+        WeaponMeshComponent->SetStaticMesh(LoadedWeaponMesh);
+    }
 }
 
 // Called every frame
