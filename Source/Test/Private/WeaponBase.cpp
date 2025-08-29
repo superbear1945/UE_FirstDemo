@@ -29,6 +29,7 @@ void AWeaponBase::OnEquipped()
 
 void AWeaponBase::StartLoadWeaponData()
 {
+    UE_LOG(LogTemp, Warning, TEXT("AWeapon::StartLoadWeaponData: %f"), GetWorld()->GetTimeSeconds());
 
     if (WeaponDataTable != nullptr && !WeaponID.IsNone())
     {
@@ -84,6 +85,8 @@ void AWeaponBase::StartLoadWeaponData()
 
 void AWeaponBase::OnWeaponDataLoaded()
 {
+    UE_LOG(LogTemp, Warning, TEXT("AWeapon::OnWeaponDataLoaded: %f"), GetWorld()->GetTimeSeconds());
+
     // 再次获取数据行
     if (WeaponDataTable == nullptr || WeaponID.IsNone()) return;
     static const FString ContextString(TEXT("Weapon Data"));

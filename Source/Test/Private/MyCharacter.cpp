@@ -75,6 +75,9 @@ void AMyCharacter::StopSprint()
 
 void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
 {
+    
+    UE_LOG(LogTemp, Warning, TEXT("AMyCharacter::SwitchWeapon: %f"), GetWorld()->GetTimeSeconds());
+
     if (WeaponDataTable == nullptr || WeaponID.IsNone()) return;
 
     // 如果当前有武器，先销毁它
@@ -103,17 +106,20 @@ void AMyCharacter::SwitchWeapon(UDataTable *WeaponDataTable, FName WeaponID)
 
 void AMyCharacter::OnWeaponLoadCompleted(TSoftClassPtr<AWeaponBase> LoadedWeaponClassPtr)
 {
+    UE_LOG(LogTemp, Warning, TEXT("AMCharacter::OnWeaponLoadCompleted: %f"), GetWorld()->GetTimeSeconds());
     
 
     // 1. 检查加载的类是否有效
     UClass* WeaponClassToSpawn = LoadedWeaponClassPtr.Get();
     if (!WeaponClassToSpawn) return;
 
-    
+    UE_LOG(LogTemp, Warning, TEXT("Before Spawn Actor: %f"), GetWorld()->GetTimeSeconds());
 
     // 2. 生成武器实例
     CurrentWeapon = GetWorld()->SpawnActor<AWeaponBase>(WeaponClassToSpawn);
     if (!CurrentWeapon) return;
+
+    UE_LOG(LogTemp, Warning, TEXT("After Spawn Actor: %f"), GetWorld()->GetTimeSeconds());
 
 
     // 3. 将武器附着在角色的RightWeaponSocket插槽上
