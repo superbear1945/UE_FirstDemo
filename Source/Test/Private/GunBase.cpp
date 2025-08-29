@@ -30,6 +30,19 @@ void AGunBase::Tick(float DeltaTime)
 	
 }
 
+void AGunBase::InitComponent()
+{
+	Super::InitComponent();
+
+	// 初始化BulletPool的大小为弹匣总容量大小
+	if(BulletPool != nullptr)
+	{
+		BulletPool->PoolSize = MaxMagazineAmmo;
+	}
+
+	UE_LOG(LogTemp, Warning, TEXT("BulletPoolSize: %d"), BulletPool->PoolSize);
+}
+
 FVector AGunBase::GetBulletShootLocation()
 {
 	if(MuzzleFromBP == nullptr){return FVector::ZeroVector;}

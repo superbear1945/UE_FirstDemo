@@ -37,7 +37,7 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	virtual void InitComponent() override;
 	
 
 	// 播放换弹动画蒙太奇的函数

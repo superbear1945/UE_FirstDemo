@@ -110,7 +110,7 @@ void AWeaponBase::OnWeaponDataLoaded()
 void AWeaponBase::InitComponent()
 {
     // 设置枪声
-    if (AGunBase* Gun = Cast<AGunBase>(this))
+    if(AGunBase* Gun = Cast<AGunBase>(this))
     {
         if (Gun->GetShootAudioComponent())
         {
@@ -119,7 +119,7 @@ void AWeaponBase::InitComponent()
     }
 
     // 设置武器静态网格体
-    if (WeaponMeshComponent != nullptr)
+    if(WeaponMeshComponent != nullptr)
     {
         WeaponMeshComponent->SetStaticMesh(LoadedWeaponMesh);
     }
