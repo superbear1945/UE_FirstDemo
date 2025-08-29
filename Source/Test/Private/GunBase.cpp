@@ -162,7 +162,8 @@ void AGunBase::SpawnBulletFromPool()
 		return;
 	}
 
-	auto *BulletActor = BulletPool->GetActorFromPool();
+	AActor *BulletActor = BulletPool->GetActorFromPool();
+	if(BulletActor == nullptr) return;
 	
 	// 让子弹获取到对象池组件，以便它在命中后能归还自己
 	ABulletBase *Bullet = Cast<ABulletBase>(BulletActor);
