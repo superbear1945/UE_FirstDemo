@@ -14,7 +14,6 @@ AGunBase::AGunBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
@@ -30,9 +29,28 @@ void AGunBase::Tick(float DeltaTime)
 	
 }
 
+
+void AGunBase::CreateComponent()
+{
+	Super::CreateComponent();
+
+	// 创建换弹音频组件
+	ReloadAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("ReloadAudioComponent"));
+	ReloadAudioComponent->SetupAttachment(RootSceneComponent);
+
+	// 创建代表枪口位置的场景组件
+	MuzzleSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MuzzleSceneComponent"));
+	MuzzleSceneComponent->SetupAttachment(WeaponMeshComponent);
+}
+
 void AGunBase::InitComponent()
 {
 	Super::InitComponent();
+
+	if(AttackAudioComponent != nullptr && LoadedAttackSound != nullptr)
+	{
+		AttackAudioComponent->SetSound(LoadedAttackSound);
+	}
 
 	// 初始化BulletPool的大小为弹匣总容量大小
 	if(BulletPool != nullptr)
@@ -45,10 +63,10 @@ void AGunBase::InitComponent()
 
 FVector AGunBase::GetBulletShootLocation()
 {
-	if(MuzzleFromBP == nullptr){return FVector::ZeroVector;}
+	if(MuzzleSceneComponent == nullptr){return FVector::ZeroVector;}
 	if(!GetWorld()->GetFirstPlayerController()) { return FVector::ZeroVector; } //检测是否存在玩家
 	FVector PlayerLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-	FVector MuzzleLocation = MuzzleFromBP->GetComponentLocation();
+	FVector MuzzleLocation = MuzzleSceneComponent->GetComponentLocation();
 	FVector PlayerForward = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorForwardVector();
 	FVector GunDirection = MuzzleLocation - PlayerLocation; //玩家指向枪口的方向
 	return (GunDirection.ProjectOnTo(PlayerForward) + PlayerLocation);
@@ -149,9 +167,9 @@ void AGunBase::Shoot_Implementation()
 		IsMagazineFull = false;
 		CurrentAmmo--;
 		// 播放射击音效
-		if (ShootAudioComponent && !ShootAudioComponent->IsPlaying())
+		if (AttackAudioComponent && !AttackAudioComponent->IsPlaying())
     	{
-    	    ShootAudioComponent->Play();
+    	    AttackAudioComponent->Play();
     	}
 		SpawnBulletFromPool();
 		OnAttack.Broadcast(this); //广播攻击事件
@@ -211,9 +229,9 @@ void AGunBase::SpawnBulletFromPool()
 
 void AGunBase::StopShooting()
 {
-    if (ShootAudioComponent)
+    if (AttackAudioComponent)
     {
-        ShootAudioComponent->Stop();
+        AttackAudioComponent->Stop();
     }
 }
 

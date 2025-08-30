@@ -37,7 +37,20 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	// 创建各种默认组件， 继承自WeaponBase并拓展
+	virtual void CreateComponent() override;
+
+	// 初始化各个组件内容
 	virtual void InitComponent() override;
+
+	// 默认持有组件
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|Component")
+	UAudioComponent *ReloadAudioComponent;
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|Component")
+	USceneComponent *MuzzleSceneComponent;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase|Component")
+	UNiagaraSystem *MuzzleFireEffect;
 	
 
 	// 播放换弹动画蒙太奇的函数
@@ -67,16 +80,7 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	float ReloadTime = 2.0f; // Reload time in seconds
 
-	// 需要在蓝图中赋值↓
-	// Reload Audio Component
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
-	UAudioComponent *ReloadAudioComponent;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase", meta = (AllowPrivateAccess = "true"))
-	USceneComponent *MuzzleFromBP;
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
-    UAudioComponent* ShootAudioComponent;
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
-	UNiagaraSystem *MuzzleFireEffect;
+    
 
 	//换弹动画的蒙太奇资产，需要在蓝图中初始化
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation", meta = (AllowPrivateAccess = "true"))
@@ -112,13 +116,14 @@ public:
 	void StopShooting();
 
 	UFUNCTION(BlueprintPure, BlueprintCallable, Category = "GunBase")
-	USceneComponent* GetMuzzleFromBP() const{return MuzzleFromBP;}
+	USceneComponent* GetMuzzleSceneComponent() const{return MuzzleSceneComponent;}
 
 	// 获取两枪之间的射击间隔时间
 	float GetShootDuration();
 
-	UAudioComponent* GetShootAudioComponent() const { return ShootAudioComponent; }
-	void SetShootSound(USoundBase* newSound) { ShootAudioComponent->SetSound(newSound); }
+	// Getters↓
+    UNiagaraSystem* GetMuzzleFireEffect() const { return MuzzleFireEffect; }
+	
 
 	virtual void Attack() override;
 private:

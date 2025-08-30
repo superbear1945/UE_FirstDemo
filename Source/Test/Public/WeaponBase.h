@@ -39,6 +39,10 @@ public:
 protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
+
+    // 创建各种组件
+    virtual void CreateComponent();
+
     // 用于给各个组件初始化内容
     virtual void InitComponent();
 
@@ -138,12 +142,8 @@ public:
     // Called every frame
     virtual void Tick(float DeltaTime) override;
 
-    // 装备武器时，调整位置插槽等
-    UFUNCTION(BlueprintCallable, Category = "Default")
-    virtual void OnEquipped();
-
     // 每个武器都要拥有攻击方法
-    UFUNCTION(BlueprintCallable, Category = "GunBase")
+    UFUNCTION(BlueprintCallable, Category = "WeaponBase")
     virtual void Attack();
 
     // C++ Getters for Weapon Properties
@@ -159,4 +159,5 @@ public:
     float GetFireSpeed() const { return FireSpeed; }
     int32 GetMaxMagazineAmmo() const { return MaxMagazineAmmo; }
     int32 GetCurrentAmmo() const { return CurrentAmmo; }
+    UAudioComponent* GetAttackAudioComponent() const { return AttackAudioComponent; }
 };
