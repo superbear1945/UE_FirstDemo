@@ -92,6 +92,8 @@ FVector AGunBase::GetBulletShootLocation()
 
 void AGunBase::Reload()
 {
+	if(IsMagazineFull || IsReloading) return; // 弹夹满了或者正在换弹就不能换弹
+	
 	IsReloading = true;
 	
 	ReloadTime = PlayReloadMontage();
@@ -100,6 +102,8 @@ void AGunBase::Reload()
 		ReloadAudioComponent->Play();
 	}
 	StopShooting(); // 换弹时停止射击
+
+	OnReloadStart.IsBound() ? OnReloadStart.Broadcast() : void(); //广播换弹开始事件
 }
 
 bool AGunBase::GetIsReloading()
@@ -165,9 +169,6 @@ void AGunBase::Attack()
         return;
     }
 
-    // 2. 检查其他条件
-    if(IsReloading || IsMagazineEmpty) return;
-
     // 3. 立即开火
     Shoot();
     
@@ -177,13 +178,14 @@ void AGunBase::Attack()
     GetWorld()->GetTimerManager().SetTimer(ShootTimerHandle, GetShootDuration(), false);
 }
 
-void AGunBase::Shoot_Implementation()
+void AGunBase::Shoot()
 {
 	IsMagazineEmpty = (CurrentAmmo <= 0);
 	if(!IsMagazineEmpty && !IsReloading)
 	{
 		IsMagazineFull = false;
 		CurrentAmmo--;
+		IsMagazineEmpty = (CurrentAmmo <= 0);
 		// 播放射击音效
 		if (AttackAudioComponent && !AttackAudioComponent->IsPlaying())
     	{
@@ -209,12 +211,16 @@ void AGunBase::Shoot_Implementation()
 		}
 		
 	}
-	else 
+	else if(IsMagazineEmpty)
 	{
-		//防止在换弹中途还能换弹
+		// 如果弹匣内没有子弹，就开始换弹逻辑
 		if(IsReloading) return;
 		StopShooting();
 		Reload();
+	}
+	else 
+	{
+		return; //如果正在上子弹，则什么都不做
 	}
 }
 

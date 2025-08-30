@@ -36,7 +36,7 @@ public:
 	// 换弹开始的事件
 	UPROPERTY(BlueprintAssignable, Category = "Event|Reload")
 	FOnReloadSignature OnReloadStart;
-	
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -86,13 +86,11 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase")
 	float ReloadTime = 2.0f; // Reload time in seconds
 
-    
 
 	//换弹动画的蒙太奇资产，需要在蓝图中初始化
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation", meta = (AllowPrivateAccess = "true"))
     UAnimMontage* ReloadMontage;
 
-	
 
 	// 定义一个定时器句柄，用于全自动武器射击的逻辑
 	FTimerHandle ShootTimerHandle; 
@@ -112,9 +110,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	bool GetIsReloading();
 
-	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "GunBase")
+	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void Shoot();
-	virtual void Shoot_Implementation();
 
 	UFUNCTION(BlueprintCallable, Category = "GunBase")
 	void StopShooting();

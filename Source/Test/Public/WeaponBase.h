@@ -101,7 +101,7 @@ protected:
     
     // 远程武器特有属性
     // 换弹音效
-    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase")
     TSoftObjectPtr<USoundBase> ReloadSound;
     // 子弹类别
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GunBase")
