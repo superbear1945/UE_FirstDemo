@@ -15,7 +15,8 @@ enum class EWeaponType : uint8
 {
 	None		UMETA(DisplayName = "None"),
 	Melee		UMETA(DisplayName = "Melee"),
-	AutoRanged	UMETA(DisplayName = "Ranged"),
+	AutoRifle	UMETA(DisplayName = "AutoRifle"),
+    Pistol     UMETA(DisplayName = "Pistol")
 };
 
 // 使用USTRUCT宏，使其能被UE的反射系统识别，并设为BlueprintType以便蓝图使用
