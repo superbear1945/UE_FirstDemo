@@ -22,6 +22,11 @@ AGunBase::AGunBase()
 void AGunBase::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// 在枪械被生成出来时检查弹匣状态
+	IsMagazineEmpty = (CurrentAmmo <= 0);
+	IsMagazineFull = (CurrentAmmo >= MaxMagazineAmmo);
+
 }
 
 // Called every frame

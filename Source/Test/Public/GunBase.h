@@ -16,7 +16,7 @@
 #include "MyCharacter.h"
 #include "GunBase.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnReloadFinishSignature);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnReloadSignature);
 
 class UAnimMontage; // 前向声明，避免不必要的头文件引用
 
@@ -30,9 +30,13 @@ public:
 	AGunBase();
 
 	// 换弹结束的事件
-	UPROPERTY(BlueprintAssignable, Category = "Event")
-	FOnReloadFinishSignature OnReloadFinish;
+	UPROPERTY(BlueprintAssignable, Category = "Event|Reload")
+	FOnReloadSignature OnReloadFinish;
 
+	// 换弹开始的事件
+	UPROPERTY(BlueprintAssignable, Category = "Event|Reload")
+	FOnReloadSignature OnReloadStart;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
