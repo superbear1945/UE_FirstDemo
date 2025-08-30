@@ -187,8 +187,8 @@ void AGunBase::Shoot_Implementation()
 		SpawnBulletFromPool();
 		OnAttack.Broadcast(this); //广播攻击事件
 		
-		// 生成枪口火焰
-		if(MuzzleFireEffect && IsMagazineEmpty == false)
+		// 生成枪口火焰，有消音器或者没子弹时不生成枪口火焰
+		if(MuzzleFireEffect && IsMagazineEmpty == false && !bHasSilencer)
 		{
 			UNiagaraComponent* NiagaraComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
 			MuzzleFireEffect, 
