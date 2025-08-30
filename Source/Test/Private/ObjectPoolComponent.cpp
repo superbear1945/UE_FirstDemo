@@ -98,7 +98,6 @@ void UObjectPoolComponent::ReturnActorToPool(AActor* ReturnedActor)
 void UObjectPoolComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	InitializePool();
 }
 
 

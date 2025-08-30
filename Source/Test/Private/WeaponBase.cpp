@@ -53,6 +53,7 @@ void AWeaponBase::StartLoadWeaponData()
             AssetPaths.Add(DataRow->AttackSound.ToSoftObjectPath());
             AssetPaths.Add(DataRow->BulletClass.ToSoftObjectPath());
             AssetPaths.Add(DataRow->WeaponMesh.ToSoftObjectPath());
+            AssetPaths.Add(DataRow->ReloadSound.ToSoftObjectPath());
             
             // 读取非指针内容
             Weight = DataRow->Weight;
@@ -109,6 +110,9 @@ void AWeaponBase::OnWeaponDataLoaded()
     LoadedAttackSound = DataRow->AttackSound.Get(); 
     LoadedWeaponMesh = DataRow->WeaponMesh.Get(); 
     LoadedBulletClass = DataRow->BulletClass.Get(); 
+    LoadedReloadSound = DataRow->ReloadSound.Get();
+
+    UE_LOG(LogTemp, Warning, TEXT("BulletClass: %s"), *LoadedBulletClass->GetName());
 
     // 使用已加载的资产为各个组件赋值
     InitComponent();
@@ -122,10 +126,11 @@ void AWeaponBase::OnWeaponDataLoaded()
 
 void AWeaponBase::InitComponent()
 {
-    // 设置武器静态网格体
+    // 设置武器静态网格体，并关闭武器碰撞
     if(WeaponMeshComponent != nullptr)
     {
         WeaponMeshComponent->SetStaticMesh(LoadedWeaponMesh);
+        WeaponMeshComponent->SetCollisionProfileName(TEXT("NoCollision"));
     }
 }
 

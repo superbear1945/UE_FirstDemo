@@ -100,6 +100,9 @@ protected:
     
     
     // 远程武器特有属性
+    // 换弹音效
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
+    TSoftObjectPtr<USoundBase> ReloadSound;
     // 子弹类别
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "GunBase")
     TSoftClassPtr<class ABulletBase> BulletClass;
@@ -131,7 +134,10 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon|Loaded Assets")
     USoundBase* LoadedAttackSound;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon|Loaded Assets")
+    USoundBase* LoadedReloadSound;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Weapon|Loaded Assets")
     UClass* LoadedBulletClass;
+    
 
 private:
     // 【修改】加载逻辑改为异步模式

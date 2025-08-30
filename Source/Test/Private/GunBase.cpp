@@ -2,6 +2,7 @@
 
 #include "GunBase.h"
 #include "NiagaraComponent.h"      
+#include "NiagaraComponentPoolMethodEnum.h"
 #include "NiagaraFunctionLibrary.h" 
 #include "Engine/TimerHandle.h"
 #include "Engine/World.h"
@@ -51,17 +52,25 @@ void AGunBase::InitComponent()
 {
 	Super::InitComponent();
 
-	
-
+	UE_LOG(LogTemp, Warning, TEXT("GunBase::InitComponent"));
+	// 设置开枪声音
 	if(AttackAudioComponent != nullptr && LoadedAttackSound != nullptr)
 	{
 		AttackAudioComponent->SetSound(LoadedAttackSound);
 	}
 
-	// 初始化BulletPool的大小为弹匣总容量大小
+	// 设置换弹声音
+	if(ReloadAudioComponent != nullptr && LoadedReloadSound != nullptr)
+	{
+		ReloadAudioComponent->SetSound(LoadedReloadSound);
+	}
+
+	// 初始化BulletPool，弹药类型为该武器的弹药
 	if(BulletPool != nullptr)
 	{
+		BulletPool->PooledObjectClass = LoadedBulletClass;
 		BulletPool->PoolSize = MaxMagazineAmmo;
+		BulletPool->InitializePool();
 	}
 }
 
@@ -177,7 +186,22 @@ void AGunBase::Shoot_Implementation()
     	}
 		SpawnBulletFromPool();
 		OnAttack.Broadcast(this); //广播攻击事件
-		// 生成枪口火焰在蓝图中实现
+		
+		// 生成枪口火焰
+		if(MuzzleFireEffect && IsMagazineEmpty == false)
+		{
+			UNiagaraComponent* NiagaraComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+			MuzzleFireEffect, 
+			MuzzleSceneComponent, 
+			NAME_None, 
+			FVector::ZeroVector, 
+			FRotator::ZeroRotator, 
+			EAttachLocation::SnapToTarget, 
+			true,
+			true,
+			ENCPoolMethod::AutoRelease
+			);
+		}
 		
 	}
 	else 

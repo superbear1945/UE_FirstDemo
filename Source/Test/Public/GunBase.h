@@ -12,7 +12,6 @@
 #include "WeaponBase.h"
 #include "UObject/ObjectMacros.h"
 #include "NiagaraComponent.h"
-#include "StopShooting.h"
 #include "ObjectPoolComponent.h"
 #include "MyCharacter.h"
 #include "GunBase.generated.h"

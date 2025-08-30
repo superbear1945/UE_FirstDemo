@@ -48,6 +48,9 @@ public:
     // 武器的静态网格体
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
     TSoftObjectPtr<UStaticMesh> WeaponMesh;
+    // 各个武器的攻击音效
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties")
+    TSoftObjectPtr<USoundBase> AttackSound;
     // 基础伤害值
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Weapon Properties")
     float Damage;
@@ -60,15 +63,16 @@ public:
     //各个武器相对于角色武器插槽的偏移
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties")
 	FTransform SocketOffSet;
-    // 各个武器的攻击音效
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Properties")
-    TSoftObjectPtr<USoundBase> AttackSound;
+    
 
 
     // 远程武器特有属性
     // 子弹类别
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "RangedWeapon")
     TSoftClassPtr<ABulletBase> BulletClass;
+    // 换弹音效
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
+    TSoftObjectPtr<USoundBase> ReloadSound;
     // 射速
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "RangedWeapon")
     float FireSpeed;

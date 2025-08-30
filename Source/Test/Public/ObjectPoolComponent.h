@@ -27,7 +27,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	void InitializePool();
+	
 
 	// Objects in the pool
 	TArray<AActor*> ObjectPool;
@@ -36,6 +36,8 @@ private:
     TArray<int32> AvailableIndices;
 
 public:	
+	void InitializePool();
+
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
