@@ -40,7 +40,7 @@ protected:
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
-    // 创建各种组件
+    // 创建各种组件，在子类中拓展并调用
     virtual void CreateComponent();
 
     // 用于给各个组件初始化内容

@@ -14,6 +14,7 @@ AGunBase::AGunBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	CreateComponent();
 }
 
 // Called when the game starts or when spawned
@@ -35,17 +36,22 @@ void AGunBase::CreateComponent()
 	Super::CreateComponent();
 
 	// 创建换弹音频组件
-	ReloadAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("ReloadAudioComponent"));
+	ReloadAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("ReloadAudio"));
 	ReloadAudioComponent->SetupAttachment(RootSceneComponent);
 
 	// 创建代表枪口位置的场景组件
-	MuzzleSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("MuzzleSceneComponent"));
+	MuzzleSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("Muzzle"));
 	MuzzleSceneComponent->SetupAttachment(WeaponMeshComponent);
+
+	// 创建管理子弹的对象池组件
+	BulletPool = CreateDefaultSubobject<UObjectPoolComponent>(TEXT("BulletPool"));
 }
 
 void AGunBase::InitComponent()
 {
 	Super::InitComponent();
+
+	
 
 	if(AttackAudioComponent != nullptr && LoadedAttackSound != nullptr)
 	{
@@ -57,8 +63,6 @@ void AGunBase::InitComponent()
 	{
 		BulletPool->PoolSize = MaxMagazineAmmo;
 	}
-
-	UE_LOG(LogTemp, Warning, TEXT("BulletPoolSize: %d"), BulletPool->PoolSize);
 }
 
 FVector AGunBase::GetBulletShootLocation()

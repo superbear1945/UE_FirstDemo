@@ -13,7 +13,6 @@ AWeaponBase::AWeaponBase()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-    CreateComponent();
 }
 
 // Called when the game starts or when spawned
@@ -40,8 +39,6 @@ void AWeaponBase::CreateComponent()
 
 void AWeaponBase::StartLoadWeaponData()
 {
-    UE_LOG(LogTemp, Warning, TEXT("AWeapon::StartLoadWeaponData: %f"), GetWorld()->GetTimeSeconds());
-
     if (WeaponDataTable != nullptr && !WeaponID.IsNone())
     {
         static const FString ContextString(TEXT("Weapon Data"));
@@ -96,13 +93,15 @@ void AWeaponBase::StartLoadWeaponData()
 
 void AWeaponBase::OnWeaponDataLoaded()
 {
-    UE_LOG(LogTemp, Warning, TEXT("AWeapon::OnWeaponDataLoaded: %f"), GetWorld()->GetTimeSeconds());
-
     // 再次获取数据行
     if (WeaponDataTable == nullptr || WeaponID.IsNone()) return;
     static const FString ContextString(TEXT("Weapon Data"));
     FWeaponData* DataRow = WeaponDataTable->FindRow<FWeaponData>(WeaponID, ContextString, true);
-    if (!DataRow) return;
+    if (!DataRow)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("%s: Can't find Weapon Data Row"), *GetName());
+        return;
+    }
 
 
     // 获取加载完成的资产的硬指针并赋值
@@ -123,7 +122,6 @@ void AWeaponBase::OnWeaponDataLoaded()
 
 void AWeaponBase::InitComponent()
 {
-
     // 设置武器静态网格体
     if(WeaponMeshComponent != nullptr)
     {

@@ -44,13 +44,16 @@ protected:
 	// 初始化各个组件内容
 	virtual void InitComponent() override;
 
-	// 默认持有组件
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|Component")
+	// 默认持有组件↓
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|Component", meta = (DisplayName = "Reload Audio"))
 	UAudioComponent *ReloadAudioComponent;
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|Component")
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|Component", meta = (DisplayName = "Muzzle"))
 	USceneComponent *MuzzleSceneComponent;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase|Component")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "GunBase|Component", meta = (DisplayName = "Muzzle Fire Effect"))
 	UNiagaraSystem *MuzzleFireEffect;
+	// 存放子弹的对象池组件
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|ObjectPool", meta = (DisplayName = "Bullet Pool"))
+	UObjectPoolComponent *BulletPool;
 	
 
 	// 播放换弹动画蒙太奇的函数
@@ -86,9 +89,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation", meta = (AllowPrivateAccess = "true"))
     UAnimMontage* ReloadMontage;
 
-	// 存放子弹的对象池组件
-    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "GunBase|ObjectPool")
-	UObjectPoolComponent *BulletPool;
+	
 
 	// 定义一个定时器句柄，用于全自动武器射击的逻辑
 	FTimerHandle ShootTimerHandle; 
